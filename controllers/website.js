@@ -367,7 +367,7 @@ router.post('/signin', function (req, res) {
   let mailTXT = ""
   let mailHTML = ""
   let dateNow = Date.now()
-  let clientIp =  ('192.168.0.1, 127.0.0.1').replace(' ','').split(',') //(req.headers['x-forwarded-for'] || '' ).replace(' ','').split(',')
+  let clientIp =  (req.headers['x-forwarded-for'] || '' ).replace(' ','').split(',')
 
   // Generate the signin code & token
   let signinToken = crypto.randomBytes(64).toString('hex')
