@@ -1,0 +1,14 @@
+{
+    "_id": "_design\/account",
+    "comment": "registred account",
+    "views": {
+        "get_account_by_mail": {
+            "map": "function(doc) {\n  if (doc.doctype=='account') {\n               emit(doc.signin_mail, null);\n  }\n}"
+        },
+        "get_account_by_id": {
+            "map": "function(doc) {\n  if (doc.doctype=='account') {\n               emit(doc._id, null);\n  }\n}"
+        }
+
+    },
+    "language": "javascript"
+}

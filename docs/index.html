@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+
+
+      <title>BTCZ Giveaway</title>
+      <meta name="description" content="Giveaway BitcoinZ (BTCz) to your friends!  ">
+  		<meta name="Keywords" content="give.btcz.app BTCz BTC Giveaway gift Crypto Bitcoin Bitcoinz Altcoins Blockchain Cryptography">
+
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+      <link rel="shortcut icon" href="/images/icoBTCZ.png" sizes="32x32" type="image/x-icon">
+      <link rel="apple-touch-icon" type="image/png" href="/images/icoBTCZ.png">
+      <link rel="icon" type="image/png" sizes="144x144" href="/images/icoBTCZ.png">
+
+      <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700,800" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/owl.carousel.css">
+      <link rel="stylesheet" type="text/css" href="css/reset.css">
+      <link rel="stylesheet" type="text/css" href="css/main.css">
+      <link rel="stylesheet" type="text/css" href="css/custom.css">
+
+
+      <script>
+
+          if (!String.prototype.includes) {
+              String.prototype.includes = function(search, start) {
+                  'use strict';
+                  if (typeof start !== 'number') {
+                      start = 0;
+                  }
+
+                  if (start + search.length > this.length) {
+                      return false;
+                  } else {
+                      return this.indexOf(search, start) !== -1;
+                  }
+              };
+          }
+
+
+      </script>
+
+
+
+
+
+  </head>
+
+  <body>
+       <div data-template="3" class="f-wrapper ">
+
+           <!-- Top Header of the page  -->
+           <div class="header_topbar" >
+               <div class="container">
+                   <div class="row">
+                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                           <div class="ht_left">
+                               <div class="clock">
+                                   <ul>
+                                       <li>UTC</li>
+                                       <li id="hours"></li>
+                                       <li id="point">:</li>
+                                       <li id="min"></li>
+                                       <li id="point-2">:</li>
+                                       <li id="sec"></li>
+                                   </ul>
+                               </div>
+                               <div class="ht_rate">
+
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <!-- Top of the page / Login Form  -->
+           <div class="f-header btc_header_home"  style="min-height:470px;">
+
+               <!-- Menu barre  -->
+               <div class="f-header_bar btc_header_bar_home">
+                   <div class="container">
+                       <div class="row">
+
+                           <div class="f-menu_toggle">
+                             <a href="https://btcz.rocks/" target="_blank"><img class="img-responsive" width="175px" src="images/btcz_logo_txt2.png" alt="" style="float: left;"></a>
+                             <img id="f-menu_toggle" class="fa fa-bars" src="images/dropdown2.png" alt="menu" title="menu" style="float: right;"></img>
+
+
+
+                           </div>
+                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-nav_sec">
+                               <div class="f-nav">
+                                 <a class="logo-f-nav" href="https://btcz.rocks/" target="_blank"><img class="img-responsive" width="175px" src="images/btcz_logo_txt2.png" alt="" style="float: left;"></a>
+                                   <nav>
+                                       <ul>
+                                           <li class="f-active"> <a href="/">Home</a>
+                                           </li>
+
+                                           <li class="">
+                                             <a href="#" onClick="
+                                               $('html, body').animate({
+                                                 scrollTop: $('#f-stats').offset().top
+                                               }, 1000);
+                                                   ">Stats</a>
+                                           </li>
+
+
+                                           <li class="">
+                                             <a href="/faq">FAQ</a>
+                                           </li>
+                                           <li class="">
+                                             <a href="/contact">Contact</a>
+                                           </li>
+
+                                          <%- userBTN %>
+
+
+                                           <li class="quote_btn">
+                                             <a target="_blank" href="https://www.mybitcoinzwallet.com/">Get a wallet</a>
+                                           </li>
+                                       </ul>
+                                   </nav>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- WEB UI short description login section  -->
+               <div class="f-slider" style="top: 15%;">
+                   <div class="f-slide_text container">
+                       <div class="row">
+
+                          <!-- WEB UI short description -->
+                           <div class="col-sm-7 col-md-8">
+                               <h1 style="margin-left: 10px;">BitcoinZ Giveaway</h1>
+                               <div class="row faqlist mainpage" style="margin-left: 25px; margin-bottom:25px;">
+
+                                      <ul>
+                                        <li>Get your free gift</li>
+                                         <li>Help promoting BTCz</li>
+
+                                         <li>Giveaway to your freinds</li>
+                                         <li>Check your BTCz giveaway</li>
+                                         <li>Manage giveaway expiration</li>
+
+                                         <li>Send gift notification per eMail</li>
+                                         <li>Print gift cards (coming soon)</li>
+
+                                      </ul>
+                              </div>
+                           </div>
+
+                           <!-- login section / Gift advance  -->
+                           <div class="col-sm-5 col-md-4">
+                                <form action="/signin" id="signin-form" method="post" role="form">
+
+                                  <div style="margin-top:-15px;padding-top:-10px;padding-bottom:25px;font-weight: bold;font-size:22px;">
+                                    <center>My dashboard</center>
+                                  </div>
+
+                                   <div class="form-group">
+                                       <input type="text" id="form1_email" name="form1_email" class="form-control" placeholder="eMail">
+                                   </div>
+
+                                   <button type="submit" class="btn btn-primary">Sign in</button>
+
+
+                                 <hr style="border-top: 1px solid #ccc;">
+
+                                 <div style="font-weight: bold;font-size:16px;">
+                                   Receive a free <%= GiftValue %> BTCz gift for your first sign in.
+                                   This gifts are limited, so don't abuse and let it for newcomer if you don't need it.
+                                 </div>
+
+                                 <div style="margin-top:10px;padding-top:10px;margin-bottom:-20px;">
+                                   <progress value="<%= GiftedGiveawayQty %>" max="<%= TotGifts %>" style="width:100%; height:25px;"></progress>
+                                 </div>
+
+                                 <div style="margin-top:-23px;padding-top:0px;font-size:13px; color: black; margin-bottom:-10px;">
+                                   <center><%= GiftedGiveawayQty %>/<%= TotGifts %> (left: <%= GiftAvailable %>)</center>
+                                 </div>
+
+
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+
+           <section id="f-about" class="container f-section f-contact_var" style="padding-top:25px;">
+             <div class="container">
+                 <div class="clearfix row">
+                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                         <div class="f-section_head">
+                             <h2>About</h2>
+                         </div>
+                         <div class="f-section_faq">
+                           <p>You can use this tool to send BitcoinZ to your friends using their eMail addresses.
+                             The <a href="/">give.btcz.app</a> giveaway tool is an free service that provide you end-to-end-user BTCz payment control.
+                             It generating a new address (and QR) for each payment.
+                             A expire date is set in case of your freinds do not take the payment, so it will be returned to your address.
+                             This is an open-sourced solution as basis for every developer.
+                             Also mostly to push user acceptance, this project must have to be a lever in the entrepreneurship people. It also allow you to promote BTCz in easy wise</p>
+                           <p>
+                             For any comment, suggestion or issues about this tool, feel free to contact us via the below community channels.
+                             You can also contact us directly by using the <a href="/contact">contact form</a>.
+                             Please visite first the <a href="/faq">FAQ</a> page for any usage related question.
+                           </p>
+                           <center>
+                             <a class="" href="https://forum.btcz.rocks/t/community-hosted-payment-gateway/842" target="_blank"><img class="" src="images/btcz_forum.png" alt="" style=""></a>
+                             <a class="" href="https://github.com/MarcelusCH/BTCz-Pay/" target="_blank"><img class="" src="images/github_txt.png" alt="" style=""></a>
+                             <a class="" href="https://discordapp.com/channels/365065626668105728/507870900339867662" target="_blank"><img class="" src="images/discord_txt.png" alt="" style=""></a>
+                             <a class="" href="https://bitcointalk.org/index.php?topic=3086664.new;topicseen#new" target="_blank"><img class="" src="images/bitcointalk_txt.png" alt="" style=""></a>
+                           </center>
+
+                           <p>
+                             This is a free and open-source service, please support us by donating <a href="https://btcz.me/Marcelus" target="_blank">here</a>.
+                             <pre style="padding-left:10px; margin-left:10px; max-width:500px;"><b>[BTCz.app] BTCz</b>: t1VYSo8VtpKMm1SUwp1KJHbqrtfqj7tgpaE</br><b>[Community] BTCz</b>: t1fHHnAXxoPWGY77sG5Zw2sFfGUTpW6BcSZ<b></br>[Increase Gift] BTCz</b>: <%= GiftAddress %></br></pre>
+                           </p>
+
+
+
+                         </div>
+                     </div>
+                 </div>
+             </div>
+           </section>
+
+
+
+
+           <section id="f-stats" class="container f-section f-contact_var" style="padding-top:0px;">
+             <div class="container">
+                 <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>Statistics</h2>
+                                   </div>
+                                  <ul>
+                                     <li>
+                                       <b>Total created gateway: </b><span id="TotGateway"></span>
+                                     </li>
+                                     <li>
+                                       <b>Actual open gateway: </b><span id="ActualGateway"></span>
+                                     </li>
+                                     <li>
+                                       <b>Paid gateway: </b><span id="PaidGateway"></span>
+                                     </li>
+                                     <li>
+                                       <b>Expired gateway: </b><span id="ExpiredGateway"></span>
+                                     </li>
+                                 </ul>
+                               </div>
+                           </div>
+                       </div>
+
+           </section>
+
+
+
+
+
+           <footer>
+               <div class="f-footer_strip">
+                   <div class="container">
+                       <div class="row">
+                           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pull-right f-footer_nav">
+                               <nav>
+                                   <ul>
+                                       <li class="f-active f-has_child"> <a href="/">Home</a></li>
+
+
+                                           <li class="">
+                                             <a href="/faq">FAQ</a>
+                                           </li>
+                                           <li class="">
+                                             <a href="/contact">Contact</a>
+                                          </li>
+                                   </ul>
+                               </nav>
+                           </div>
+                           <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                               <p>Copyright give.btcz.app © 2018. All right reserved</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </footer>
+
+
+       </div>
+
+       <div class="f-back_to_top" id="f-back_to_top"> <i class="material-icons">arrow_upward</i>
+       </div>
+
+       <script type="text/javascript" src="js/jquery.min.js"></script>
+       <script type="text/javascript" src="js/cookie.js"></script>
+       <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+       <script type="text/javascript" src="js/jquery.counter.js"></script>
+       <script type="text/javascript" src="js/custom.js"></script>
+
+       <script>
+         $('#SpeedSweepLabel').click(function () {
+             if (document.getElementById("SpeedSweep").checked) {
+                 $('input[type=checkbox]').attr('checked', false);
+                 $("#SpeedSweepLabel").html("Speed Pay NOT Active");
+             } else {
+               $('input[type=checkbox]').attr('checked', true);
+               $("#SpeedSweepLabel").html("Speed Pay Active (+<%= speed_sweep_fee %>%)");
+             }
+         });
+       </script>
+
+
+   </body>
+
+
+
+</html>

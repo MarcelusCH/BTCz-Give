@@ -1,0 +1,19 @@
+{
+    "_id": "_design\/giveaway",
+    "comment": "existing giveaway",
+    "views": {
+        "get_giveaway_by_sender_id": {
+            "map": "function(doc) {\n  if (doc.doctype=='giveaway') {\n               emit(doc.from_id, null);\n  }\n}"
+        },
+        "get_giveaway_by_reciever_id": {
+            "map": "function(doc) {\n  if (doc.doctype=='giveaway') {\n               emit(doc.to_id, null);\n  }\n}"
+        },
+        "get_giveaway_by_id": {
+            "map": "function(doc) {\n  if (doc.doctype=='giveaway') {\n               emit(doc._id, null);\n  }\n}"
+        },
+        "get_giveaway_by_state": {
+            "map": "function(doc) {\n  if (doc.doctype=='giveaway') {\n               emit(doc.state, null);\n  }\n}"
+        }
+    },
+    "language": "javascript"
+}

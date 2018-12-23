@@ -1,0 +1,30 @@
+module.exports = {
+  'port': 2233,
+  'testnet': false,
+  'site_url': 'http://localhost:2233',
+  'base_url': 'http://localhost:2233',
+  'base_url_qr': 'http://localhost:2233',
+  'couchdb': 'http://user:password@localhost:5984/btczgive',  // install locally or use https://cloudant.com
+  'bitcoind': {
+    rpc: 'http://user:password@127.0.0.1:1979'
+  },
+  'smtp': {
+    host: 'smtp.domain.com',
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: {
+      user: 'info@domain.com',
+      pass: 'password'
+    }
+  },
+  'session_time': 30, // Time before session expire if no activity in minutes
+  'tmp_address' : 't1gsaCDX7HBWyvzif75DdkpJH4cFJuTyZcV', // tmp address to use for speed sweep
+  'tmp_address_WIF' : 'WIF_private_key',
+  'fee_tx' : 0.0001,
+  'GoogleAnalytics' : 'AnalyticsKey',
+  'gift_value': 100,
+  'gift_valid': 10, // in days
+  'give_gift_same-ip': 5,
+  'give_gift_same_ip_time': 24
+}

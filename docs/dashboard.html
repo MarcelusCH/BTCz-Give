@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+
+
+    <title>My Dashboard | BTCZ Giveaway</title>
+    <meta name="description" content="">
+    <meta name="Keywords" content="">
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="shortcut icon" href="/images/icoBTCZ.png" sizes="32x32" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/png" href="/images/icoBTCZ.png">
+    <link rel="icon" type="image/png" sizes="144x144" href="/images/icoBTCZ.png">
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+
+
+    <script>
+
+        if (!String.prototype.includes) {
+            String.prototype.includes = function(search, start) {
+                'use strict';
+                if (typeof start !== 'number') {
+                    start = 0;
+                }
+
+                if (start + search.length > this.length) {
+                    return false;
+                } else {
+                    return this.indexOf(search, start) !== -1;
+                }
+            };
+        }
+
+
+    </script>
+
+
+
+
+  </head>
+
+  <body>
+    <div data-template="3" class="f-wrapper ">
+
+      <!-- Top Header of the page  -->
+      <div class="header_topbar">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                     <div class="ht_left">
+                         <div class="clock">
+                             <ul>
+                                 <li>UTC</li>
+                                 <li id="hours"></li>
+                                 <li id="point">:</li>
+                                 <li id="min"></li>
+                                 <li id="point-2">:</li>
+                                 <li id="sec"></li>
+                             </ul>
+                         </div>
+                         <div class="ht_rate">
+
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+      </div>
+
+      <!-- Content of the page  -->
+      <div class="f-header btc_header_home"  style="min-height:810px;">
+
+         <!-- Menu barre  -->
+         <div class="f-header_bar btc_header_bar_home">
+             <div class="container">
+                 <div class="row">
+
+                     <div class="f-menu_toggle">
+                       <a href="https://btcz.rocks/" target="_blank"><img class="img-responsive" width="175px" src="images/btcz_logo_txt2.png" alt="" style="float: left;"></a>
+                       <img id="f-menu_toggle" class="fa fa-bars" src="images/dropdown2.png" alt="menu" title="menu" style="float: right;"></img>
+
+
+
+                     </div>
+                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-nav_sec">
+                         <div class="f-nav">
+                           <a class="logo-f-nav" href="https://btcz.rocks/" target="_blank"><img class="img-responsive" width="175px" src="images/btcz_logo_txt2.png" alt="" style="float: left;"></a>
+                             <nav>
+                                 <ul>
+                                   <li> <a href="/">Home</a>
+                                   </li>
+
+                                   <li class="">
+                                     <a href="/#f-stats">Stats</a>
+                                   </li>
+
+                                   <li >
+                                     <a href="/faq">FAQ</a>
+                                   </li>
+                                   <li>
+                                     <a href="/contact">Contact</a>
+                                   </li>
+                                   <%- userBTN %>
+                                   <li class="quote_btn">
+                                     <a target="_blank" href="https://www.mybitcoinzwallet.com/">Get a wallet</a>
+                                   </li>
+                                 </ul>
+                             </nav>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+         <!-- Dashboard content -->
+         <div class="f-slider" style="top: 15%;">
+             <div class="f-slide_text container">
+                 <div class="row">
+                     <div class="col-sm-12 col-md-12">
+                       <h1 class="dash_title">My Dashboard</h1>
+
+                        <!-- Dashboard content -->
+                        <div id="accordion" class="dash_accordion">
+
+                           <!-- Profile informations -->
+                           <h3>PROFILE</h3>
+                           <div>
+
+                               <form id="profile-form" method="post" role="form">
+                                 <fieldset>
+                                   <label for="profile_eMail">eMail</label>
+                                   <input id="profile_eMail" name="profile_eMail" type="text" value="<%= userInfo[0] %>" disabled>
+                                   <label for="profile_userName">User Name</label>
+                                   <input id="profile_userName" name="profile_userName" type="text" placeholder="Your profile name" value="<%= userInfo[2] %>">
+                                   <label for="profile_address">BTCz address (for receiving)</label>
+                                   <input id="profile_address" name="profile_address" type="text" placeholder="Your BTCz address" value="<%= userInfo[1] %>">
+                                   <label for="profile_message">About me</label>
+                                   <textarea id="profile_message" name="profile_message" placeholder="Enter text here" rows="3"><%= userInfo[3] %></textarea>
+                                 </fieldset>
+                                 <button onclick="SaveProfile()" id="btnSaveProfile" class="btn btn-primary" style="width:150px; margin-top:0px;">Save</button>
+                               </form>
+
+                           </div>
+
+                           <!-- Giveaway List -->
+                           <h3 id="giveaway_title"></h3>
+                           <div>
+                             <p>Find bellow the BTCz giveaway that you gave to other people.</p>
+                             <div id="giveaway_listing"></div>
+                             <form id="new-giveaway-form" method="post" role="form">
+                               <button id="btn_NewGiveaway" class="btn btn-primary" style="width:150px;" onclick="NewGiveaway()">New Giveaway</button>
+                               <input id="new_giveaway_mail" name="new_giveaway_mail" type="hidden" value="<%= userInfo[0] %>">
+                             </form>
+                           </div>
+
+                           <!-- Recieved gift List -->
+                           <h3 id="recieved_title"></h3>
+                           <div>
+                             <p>Find bellow the received BTCz that you received through this platform.</p>
+                             <div id="recieved_listing">
+                            </div>
+                            <form id="recieved-form" method="post" role="form">
+                              <button type="submit" class="btn btn-primary" style="width:120px;" disabled>Sweep all</button>
+                              <button type="submit" class="btn btn-primary" style="width:120px;" disabled>Return all</button>
+                              <input id="recieved_mail" name="recieved_mail" type="hidden" value="<%= userInfo[0] %>">
+                            </form>
+
+                           </div>
+
+                           <!-- auto sweep & no eMail me options -->
+                           <h3>SETTINGS</h3>
+                           <div>
+
+                             <form id="setting-form" method="post" role="form">
+                               <label class="containerCB">Auto sweep to my wallet once receive found.
+                                  <input id="setting_sweep2" name="setting_sweep2" type="checkbox" checked="checked">
+                                  <input id="setting_sweep" name="setting_sweep" type="hidden" value="1">
+                                  <span class="checkmark"></span>
+                                </label>
+                                <label class="containerCB">Do NOT send me an eMail when I receive found.
+                                   <input id="setting_mail2" name="setting_mail2" type="checkbox" checked="checked">
+                                   <input id="setting_mail" name="setting_mail" type="hidden" value="1">
+                                   <span class="checkmark"></span>
+                                 </label>
+                                 <button onclick="SaveSetting()" id="btnSaveSetting" class="btn btn-primary" style="width:120px;">Save</button>
+                               </form>
+
+                           </div>
+
+
+                         </div>
+
+                        <a href="/logout" class="btn btn-primary" style="width:120px; margin-left:10px; padding-top:10px;">Logout</a>
+
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+      </div>
+
+      <!-- Footer of the page  -->
+      <footer>
+          <div class="f-footer_strip">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pull-right f-footer_nav">
+                          <nav>
+                              <ul>
+                                  <li class="f-active f-has_child"> <a href="/">Home</a></li>
+
+
+                                      <li class="">
+                                        <a href="/faq">FAQ</a>
+                                      </li>
+                                      <li class="">
+                                        <a href="/contact">Contact</a>
+                                     </li>
+                              </ul>
+                          </nav>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                          <p>Copyright give.btcz.app © 2018. All right reserved</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </footer>
+
+
+
+      <!-- For modal GIVEAWAY panel -->
+      <div id="myModal" class="modal">
+       <div class="modal-content">
+
+         <div class="modal-header">
+           <span class="close">&times;</span>
+           <div>Giveaway</div>
+           <p id="item_giveaway_id"></p>
+         </div>
+
+         <div class="modal-body">
+           <div class="row">
+             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+               <table>
+                 <tr>
+                   <td><b>Status:</b><td>
+                   <td id="item_giveaway_state"><td>
+                 </tr>
+                 <tr>
+                   <td><b>Confirmed:</b><td>
+                   <td id="item_giveaway_confirmed"><td>
+                 </tr>
+                 <tr>
+                   <td><b>Unconfirmed:</b><td>
+                   <td id="item_giveaway_unconfirmed"><td>
+                 </tr>
+                 <tr>
+                   <td><b>Receiver:</b><td>
+                   <td id="item_giveaway_reciever"><td>
+                 </tr>
+                 <tr>
+                   <td><b>Epire on:</b><td>
+                   <td id="item_giveaway_expire"><td>
+                 </tr>
+               </table>
+
+               <table>
+                 <tr>
+                   <td><b>Share my pseudo: </b><td>
+                   <td id="item_giveaway_share_pseudo"><td>
+                 </tr>
+                 <tr>
+                   <td><b>Share my eMail: </b><td>
+                   <td  id="item_giveaway_share_mail"><td>
+                 </tr>
+               </table>
+
+               <table>
+                 <tr>
+                   <td><b>Text: </b><td>
+                   <td id="item_giveaway_message"><td>
+                 </tr>
+               </table>
+
+               <table>
+                 <tr>
+                   <td><b>Caution: </b><td>
+                   <td>Do not send founds if the giveaway is expired or already token. This will result in lost of the founds.<td>
+                 </tr>
+
+               </table>
+
+             </div>
+
+             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+               <center>
+                 <img id="item_giveaway_qr" src="" width="250"></img>
+                 <div id="item_giveaway_address" style="margin-bottom:5px;"></div>
+               </center>
+             </div>
+
+          </div>
+         </div>
+
+         <div class="modal-footer">
+         </div>
+
+       </div>
+      </div>
+
+      <!-- For modal RECEIVED panel -->
+      <div id="myModal2" class="modal">
+       <div class="modal-content">
+
+         <div class="modal-header">
+           <span class="close">&times;</span>
+           <div>Received</div>
+           <p id="item_recieved_id"></p>
+         </div>
+
+         <div class="modal-body">
+           <div class="row">
+             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+               <table>
+                 <tr>
+                   <td><b>Status:</b><td>
+                   <td id="item_recieved_state"><td>
+                 </tr>
+                 <tr>
+                   <td><b>Confirmed:</b><td>
+                   <td id="item_recieved_confirmed"><td>
+                 </tr>
+                 <tr>
+                   <td><b>Unconfirmed:</b><td>
+                   <td id="item_recieved_unconfirmed"><td>
+                 </tr>
+                 <tr>
+                   <td><b>Sender:</b><td>
+                   <td id="item_recieved_sender"><td>
+                 </tr>
+                 <tr>
+                   <td><b>Epire on:</b><td>
+                   <td id="item_recieved_expire"><td>
+                 </tr>
+               </table>
+
+               <table>
+                 <tr>
+                   <td><b>Text: </b><td>
+                   <td id="item_recieved_message"><td>
+                 </tr>
+               </table>
+
+
+             </div>
+
+             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+               <center>
+                 <img id="item_recieved_qr" src="" width="250"></img>
+                 <div id="item_recieved_address" style="margin-bottom:5px;"></div>
+               </center>
+             </div>
+
+          </div>
+         </div>
+
+
+         <div class="modal-footer modal-footer-2">
+           <button onclick="SweepGiveaway()" id="btn_sweep_recieved" type="submit" class="btn btn-primary" style="width:120px;" disabled title="Enter you BTCz address in the profile section before.">Sweep</button>
+           <button onclick="ReturnGiveaway()" id="btn_return_recieved"  type="submit" class="btn btn-primary" style="width:120px;">Return</button>
+         </div>
+
+       </div>
+      </div>
+
+      <!-- For modal NEW panel -->
+      <div id="newGiveaway" class="modal">
+        <div class="modal-content">
+          <form id="send-giveaway-form" method="post" role="form">
+
+            <input id="new_giveaway_id_hidden" name="new_giveaway_id_hidden" type="hidden" value="">
+            <input id="new_giveaway_sender_mail_hidden" name="new_giveaway_sender_mail_hidden" type="hidden" value="<%= userInfo[0] %>">
+
+            <!-- Title -->
+            <div class="modal-header">
+              <div>New giveaway</div>
+              <p id="new_giveaway_id"></p>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+
+                  <!-- Infos -->
+                  <table>
+                    <tr>
+                      <td><b>Status:</b><td>
+                      <td id="new_giveaway_id">Creation...<td>
+                    </tr>
+                    <tr>
+                      <td><b>Amount:</b><td>
+                      <td id="new_giveaway_amount">0 BTCz<td>
+                    </tr>
+                    <tr>
+                      <td><b>Unconfirmed:</b><td>
+                      <td id="new_giveaway_uncofirmed">0 BTCz<td>
+                    </tr>
+                  </table>
+
+                  <!-- Fields -->
+                  <table width="100%">
+                    <tr>
+                      <td>
+                        <fieldset>
+                          <label for="new_giveaway_sendto">Receiver's eMail: </label>
+                          <input id="new_giveaway_sendto" name="new_giveaway_sendto" type="email" placeholder="receiver@domain.com" required="required">
+                        </fieldset>
+                      <td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label class="containerCB SendGiveawayCB">Receiver will know my eMail.
+                           <input id="new_giveaway_givemail2" name="new_giveaway_givemail2" type="checkbox" >
+                           <input id="new_giveaway_givemail" name="new_giveaway_givemail" type="hidden" value="0">
+                           <span class="checkmark"></span>
+                         </label>
+                         <label class="containerCB SendGiveawayCB">Receiver will know my profil name.
+                            <input id="new_giveaway_givename2" name="new_giveaway_givename2" type="checkbox" checked="checked">
+                            <input id="new_giveaway_givename" name="new_giveaway_givename" type="hidden" value="1">
+                            <span class="checkmark"></span>
+                          </label>
+                      <td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <fieldset>
+                          <label for="new_giveaway_expire">Epire on: </label>
+                          <input id="new_giveaway_expire" name="new_giveaway_expire" type="date" placeholder="receiver@domain.com" required="required">
+                        </fieldset>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <fieldset>
+                          <label for="new_giveaway_message">Message: </label>
+                          <textarea name="new_giveaway_message" id="new_giveaway_message" rows="3" placeholder="Type here your message..."></textarea>
+                        </fieldset>
+                      </td>
+                    </tr>
+                  </table>
+
+                </div>
+
+                <!-- QR & address infos -->
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 alignCenterNewGA" >
+                  <div  style="display: table; height: 100%; width: 100%; top: 0;left: 0;">
+                    <div style="display: table-cell; vertical-align: middle;">
+                      <div>
+                        <center>
+                          <div style="margin-bottom:5px; font-size:16px; padding-top:5px;"><b>Use this address</br>to charge the gift</b></div>
+                          <img width="300" id="new_giveaway_img"></img>
+                          <div style="margin-bottom:5px;" id="new_giveaway_address"></div>
+                        </center>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+             </div>
+            </div>
+
+            <!-- Submit buttons -->
+            <div class="modal-footer modal-footer-2">
+              <button onclick="ConfirmeGiveaway();" class="btn btn-primary" style="width:120px;">Send</button>
+              <button onclick="CloseNewGiveaway();" class="btn btn-primary" style="width:120px;" formnovalidate>Cancel</button>
+              <button id="btn_new_giveaway_update" onclick="UpdateRecievedAmount();" class="btn btn-primary" style="width:120px; display:none;" formnovalidate >update</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      <input id="new_giveaway_is_open" type="hidden" value="0">
+
+
+
+
+
+      <!-- For modal WELCOME panel -->
+      <div id="myModal_welcome" class="modal">
+       <div class="modal-content">
+
+         <div class="modal-header">
+           <span class="close">&times;</span>
+           <div><h1 style="color:white;">WELCOME</h1></div>
+         </div>
+
+         <div class="modal-body" style="height:500px;max-height: 500px; overflow-y: scroll;">
+
+           <h2 style="margin-top:10px;">About this tool</h2>
+           <p style="margin-top:-10px;">You can use this tool to send BitcoinZ to your friends using their eMail addresses.
+             The <a href="/">give.btcz.app</a> giveaway tool is an free service that provide you end-to-end-user BTCz payment control.
+             It generating a new address (and QR) for each payment.
+             A expire date is set in case of your freinds do not take the payment, so it will be returned to your address.
+             This is an open-sourced solution as basis for every developer.
+             Also mostly to push user acceptance, this project must have to be a lever in the entrepreneurship people. It also allow you to promote BTCz in easy wise</p>
+
+           <h2 style="margin-top:10px;">My weclome gift</h2>
+
+           <p style="margin-top:-10px;">You should have received a welcome gift. This gift is only given to newcomers.
+             A verification by IP client is performed and only allows you 5 connections in 24 hours (to be entitled to this gift).
+             This allows you to enjoy this gift also up to 5 member your family using the same internet connection.</p>
+           <p style="margin-top:-15px;">If you don't need this gift, you can return it. It will be used for a other newcomer.
+            If you want to help and extend the number of gifts for new users, you can send a giveaway from this tool or transfer funds from your wallet to the address below.</p>
+
+            <p><pre style="padding-left:10px; margin-left:10px; max-width:500px;"><b>[Increase Gift] BTCz</b>: <%= GiftAddress %><b></br>[Increase Gift] eMail</b>: info@btcz.app</br></pre></p>
+
+            <button onclick="KillWelcomeInfo();" class="btn btn-primary" style="width:150px; margin-bottom:10px;">Don't show again</button>
+
+         </div>
+
+        </div>
+      </div>
+
+
+
+
+      <!-- Result info panel -->
+      <div id="form-result"></div>
+
+
+    </div>
+    <div class="f-back_to_top" id="f-back_to_top"> <i class="material-icons">arrow_upward</i></div>
+
+
+
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/cookie.js"></script>
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/jquery.counter.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/jquery.form.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+
+
+    <script>$("#accordion" ).accordion();</script>
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <script>$("#accordion").css('display', 'block');</script>
+
+
+
+    <!-- Received functions -->
+    <script>
+
+      // elem. definition
+      var modalgiveaway = document.getElementById('myModal');
+      var modalrecieved = document.getElementById('myModal2');
+      var modalwelcome = document.getElementById('myModal_welcome');
+      var span = document.getElementsByClassName("close")[0];
+      var span1 = document.getElementsByClassName("close")[1];
+      var span2 = document.getElementsByClassName("close")[2];
+
+      // Close the modals panel
+      span.onclick = function() {
+          modalgiveaway.style.display = "none";
+          modalrecieved.style.display = "none";
+      }
+      span1.onclick = function() {
+          modalgiveaway.style.display = "none";
+          modalrecieved.style.display = "none";
+      }
+
+      // Get the modal for givaway infos
+      $(document).on('click', '.td_giveaway', function(e) {
+        UpdateGiveaway($(this).html());
+        modalgiveaway.style.display = "block";
+      });
+
+      // Get the modal for received infos
+      $(document).on('click', '.td_recieved', function(e) {
+        UpdateRecieved($(this).html());
+        modalrecieved.style.display = "block";
+      });
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+         if (event.target == modalgiveaway) {
+             modalgiveaway.style.display = "none";
+         }
+         if (event.target == modalrecieved) {
+             modalrecieved.style.display = "none";
+         }
+         if (event.target == modalwelcome) {
+             modalwelcome.style.display = "none";
+         }
+      }
+
+      // Update the giveaway panel
+      function UpdateGiveaway(give_id) {
+        $.ajax({
+            type: "POST",
+            data: { _id: give_id, eMail: "<%= userInfo[0] %>" },
+            url : "dashboard/updategiveawayitem",
+            dataType : 'json',
+            statusCode : {
+               403: function() { // Session expired
+                 document.location.href="/?msg=0";
+               },
+               500: function() { // Internal error
+                 $("#form-result").css("background-color","#ff5050");
+                 $("#form-result").html('The giveaway can not be displayed.');
+                 $("#form-result").css("display","block");
+                 setTimeout(function(){
+                   $("#form-result").css("display","none");
+                 }, 3000);
+               },
+            },
+            success : function (data) {
+              $("#item_giveaway_qr").attr("src", "generate_qr/bitcoinz%253A" + data.address );
+              $("#item_giveaway_confirmed").html(data.confirmed +' BTCz');
+              $("#item_giveaway_unconfirmed").html(data.unconfirmed +' BTCz');
+
+              $("#item_giveaway_id").html(data.giveawayID);
+              $("#item_giveaway_state").html(data.stateTXT);
+              $("#item_giveaway_reciever").html(data.giveToMail);
+              $("#item_giveaway_expire").html(data.expire);
+              $("#item_giveaway_share_pseudo").html(data.giveShowFromUser);
+              $("#item_giveaway_share_mail").html(data.giveShowFromMail);
+              $("#item_giveaway_message").html(data.message);
+              $("#item_giveaway_address").html(data.address);
+
+            },
+            error : function (data) {
+              $("#form-result").css("background-color","#ff5050");
+              $("#form-result").html('The giveaway can not be diplayed.');
+              $("#form-result").css("display","block");
+              setTimeout(function(){
+                $("#form-result").css("display","none");
+              }, 3000);
+            }
+        });
+      }
+
+      // Update the recevied panel
+      function UpdateRecieved(give_id) {
+        $.ajax({
+            type: "POST",
+            data: { _id: give_id, eMail: "<%= userInfo[0] %>" },
+            url : "dashboard/updategiveawayitem",
+            dataType : 'json',
+            statusCode : {
+               403: function() { // Session expired
+                 document.location.href="/?msg=0";
+               },
+               500: function() { // Internal error
+                 $("#form-result").css("background-color","#ff5050");
+                 $("#form-result").html('The giveaway can not be displayed.');
+                 $("#form-result").css("display","block");
+                 setTimeout(function(){
+                   $("#form-result").css("display","none");
+                 }, 3000);
+               },
+            },
+            success : function (data) {
+              $("#item_recieved_qr").attr("src", "generate_qr/bitcoinz%253A" + data.address );
+              $("#item_recieved_confirmed").html(data.confirmed +' BTCz');
+              $("#item_recieved_unconfirmed").html(data.unconfirmed +' BTCz');
+
+              $("#item_recieved_id").html(data.giveawayID);
+              $("#item_recieved_state").html(data.stateTXT);
+              $("#item_recieved_sender").html(data.giveFromMail);
+              $("#item_recieved_expire").html(data.expire);
+              $("#item_recieved_message").html(data.message);
+              $("#item_recieved_address").html(data.address);
+
+              // Check if address is set
+              if ($("#profile_address").val() != "") {
+                $("#btn_sweep_recieved").attr("disabled", false);
+                $("#btn_sweep_recieved").attr("title", "");
+              } else {
+                $("#btn_sweep_recieved").attr("disabled", true);
+                $("#btn_sweep_recieved").attr("title", "Enter you BTCz address in the profile section before.");
+              }
+
+              // Check if already sweeped
+              if (data.state!=1) {
+                $("#btn_sweep_recieved").attr("disabled", true);
+                $("#btn_sweep_recieved").attr("title", "Giveaway already sweeped.");
+                $("#btn_return_recieved").attr("disabled", true);
+                $("#btn_return_recieved").attr("title", "Giveaway already sweeped.");
+              }
+
+            },
+            error : function (data) {
+              $("#form-result").css("background-color","#ff5050");
+              $("#form-result").html('The giveaway can not be diplayed.');
+              $("#form-result").css("display","block");
+              setTimeout(function(){
+                $("#form-result").css("display","none");
+              }, 3000);
+            }
+        });
+      }
+
+      // Sweep the giveaway to the user addres
+      function SweepGiveaway(give_id) {
+        $.ajax({
+            type: "POST",
+            data: { _id: $("#item_recieved_id").html(), eMail: "<%= userInfo[0] %>" },
+            url : "dashboard/sweepgiveaway",
+            dataType : 'json',
+            statusCode : {
+               403: function() { // Session expired
+                 document.location.href="/?msg=0";
+               },
+               500: function() { // Internal error
+                 $("#form-result").css("background-color","#ff5050");
+                 $("#form-result").html('The giveaway can not be sweeped.');
+                 $("#form-result").css("display","block");
+                 setTimeout(function(){
+                   $("#form-result").css("display","none");
+                 }, 3000);
+               },
+            },
+            success : function (data) {
+              $("#form-result").html( data );
+              if (data.indexOf("Error")>=0){  $("#form-result").css("background-color","#ff5050");}
+              if (data.indexOf("Error")==-1){  $("#form-result").css("background-color","#33cc33");}
+              UpdateRecievedList();
+            }
+        });
+
+        $("#form-result").css("display","block");
+        setTimeout(function(){
+          $("#form-result").css("display","none");
+        }, 3000);
+
+        var modal = document.getElementById('myModal2');
+        modal.style.display = "none";
+
+      }
+
+      // Return the giveaway to the sender's wallet
+      function ReturnGiveaway(give_id) {
+
+        // Ask for confirmation
+        if (!(confirm('Return the amount of this giveaway to the sender? \n\n(Clic cancel to stop the return procedure)'))) {
+          return;
+        }
+
+        $.ajax({
+            type: "POST",
+            data: { _id: $("#item_recieved_id").html(), eMail: "<%= userInfo[0] %>" },
+            url : "dashboard/returngiveaway",
+            dataType : 'json',
+            statusCode : {
+               403: function() { // Session expired
+                 document.location.href="/?msg=0";
+               },
+               500: function() { // Internal error
+                 $("#form-result").css("background-color","#ff5050");
+                 $("#form-result").html('The giveaway can not be sweeped.');
+                 $("#form-result").css("display","block");
+                 setTimeout(function(){
+                   $("#form-result").css("display","none");
+                 }, 3000);
+               },
+            },
+            success : function (data) {
+              $("#form-result").html( data );
+              if (data.indexOf("Error")>=0){  $("#form-result").css("background-color","#ff5050");}
+              if (data.indexOf("Error")==-1){  $("#form-result").css("background-color","#33cc33");}
+              UpdateRecievedList();
+            }
+        });
+
+        $("#form-result").css("display","block");
+        setTimeout(function(){
+          $("#form-result").css("display","none");
+        }, 3000);
+
+        var modal = document.getElementById('myModal2');
+        modal.style.display = "none";
+
+      }
+
+
+    </script>
+
+
+    <!-- Giveaway functions -->
+    <script>
+
+      // Create a new giveaway
+      function NewGiveaway(){
+
+       $('#new-giveaway-form').ajaxForm({
+           url : "dashboard/newgiveaway",
+           dataType : 'json',
+           statusCode : {
+              403: function() { // Session expired
+                document.location.href="/?msg=0";
+              },
+              500: function() { // Internal error
+                $("#form-result").css("background-color","#ff5050");
+                $("#form-result").html('The new giveaway can not be created.');
+                $("#form-result").css("display","block");
+                setTimeout(function(){
+                  $("#form-result").css("display","none");
+                }, 3000);
+              },
+           },
+           success : function (data) {
+
+             // Set data
+             $("#new_giveaway_id").html(data.giveaway_id);
+             $("#new_giveaway_id_hidden").attr("value", data.giveaway_id);
+             $("#new_giveaway_address").html(data.address);
+             $("#new_giveaway_img").attr("src", "generate_qr/bitcoinz%253A" + data.address );
+             $("#new_giveaway_is_open").attr("value", "1");
+
+             // Show form
+             var modal = document.getElementById('newGiveaway');
+             modal.style.display = "block";
+           },
+           error : function (data) {
+             $("#form-result").css("background-color","#ff5050");
+             $("#form-result").html('The new giveaway can not be created.');
+             $("#form-result").css("display","block");
+             setTimeout(function(){
+               $("#form-result").css("display","none");
+             }, 3000);
+           }
+       });
+
+      }
+
+      // Close the create giveaway panel
+      function CloseNewGiveaway() {
+
+        // If already loaded amout, ask if really cancel...
+        var amountLoaded = Number($("#new_giveaway_uncofirmed").html().replace(' BTCz', ''))
+        if (amountLoaded>0) {
+          if (!(confirm('You have already loaded this giveaway. \nIf you continue, this amount will be sent to the newcommer gift pot! \n\n(Clic cancel to continue giveaway gift)'))) {
+            return;
+          }
+        }
+
+        // Remove giveaway
+        $('#send-giveaway-form').ajaxForm({
+            url : "dashboard/delgiveaway",
+            dataType : 'json',
+            success : function (data) {
+              $("#form-result").html( data );
+              if (data.indexOf("Error")>=0){  $("#form-result").css("background-color","#ff5050");}
+              if (data.indexOf("Error")==-1){  $("#form-result").css("background-color","#33cc33");}
+              $("#new_giveaway_is_open").attr("value", "0");
+              UpdateGiveawayList();
+            }
+        });
+
+        $("#form-result").css("display","block");
+        setTimeout(function(){
+          $("#form-result").css("display","none");
+        }, 3000);
+
+        var modal = document.getElementById('newGiveaway');
+        modal.style.display = "none";
+
+      }
+
+      // Confirme the new giveaway
+      function ConfirmeGiveaway() {
+
+        // Check if eMail is other than self one
+        if ($("#new_giveaway_sendto").val()==="<%= userInfo[0] %>") {
+          alert('The receiver can not be the sender !');
+          return;
+        }
+
+        // If already loaded amout, ask if really cancel...
+        var amountLoaded = Number($("#new_giveaway_uncofirmed").html().replace(' BTCz', ''))
+        if (amountLoaded<1) {
+          alert('A minimum of 1 BTCz must be offered!');
+          return;
+        }
+
+        // Confirm action...
+        $('#send-giveaway-form').ajaxForm({
+            url : "dashboard/confirmegiveaway",
+            dataType : 'json',
+            success : function (data) {
+              $("#form-result").html( data );
+              if (data.indexOf("Error")>=0){  $("#form-result").css("background-color","#ff5050");}
+              if (data.indexOf("Error")==-1){  $("#form-result").css("background-color","#33cc33");}
+              $("#new_giveaway_is_open").attr("value", "0");
+              UpdateGiveawayList();
+            }
+        });
+
+        $("#form-result").css("display","block");
+        setTimeout(function(){
+          $("#form-result").css("display","none");
+        }, 3000);
+
+        var modal = document.getElementById('newGiveaway');
+        modal.style.display = "none";
+
+      }
+
+      // Update the giveaway listing
+      function UpdateGiveawayList() {
+        $.ajax({
+          type: "POST",
+          url: "dashboard/updategiveawaylist",
+          dataType : 'json',
+          success : function (data) {
+            $("#giveaway_listing").html(data.html);
+            $("#giveaway_title").html("GIVEAWAY ("+data.count+")");
+          }
+        });
+      }
+
+      // Update the recived listing
+      function UpdateRecievedList() {
+        $.ajax({
+          type: "POST",
+          url: "dashboard/updaterecievedlist",
+          dataType : 'json',
+          success : function (data_r) {
+            $("#recieved_listing").html(data_r.html);
+            $("#recieved_title").html("RECEIVED ("+data_r.count+")");
+          }
+        });
+      }
+
+      // Update the NEW giveaway recieved amount (if open)
+      function UpdateRecievedAmount() {
+        $('#send-giveaway-form').ajaxForm({
+            url : "dashboard/updatenewgiveaway",
+            dataType : 'json',
+            success : function (data) {
+              $("#new_giveaway_img").attr("src", "generate_qr/bitcoinz%253A" + data.address );
+              $("#new_giveaway_amount").html(data.confirmed +' BTCz');
+              $("#new_giveaway_uncofirmed").html(data.unconfirmed +' BTCz');
+            }
+        });
+      }
+
+      // Set Checkbox on change (for new giveaway panel)
+      $('#new_giveaway_givemail2').change(function() {
+          if($(this).is(":checked")) {
+              document.getElementById('new_giveaway_givemail').value = 1;
+          } else {
+              document.getElementById('new_giveaway_givemail').value = 0;
+          }
+      });
+      $('#new_giveaway_givename2').change(function() {
+          if($(this).is(":checked")) {
+              document.getElementById('new_giveaway_givename').value = 1;
+          } else {
+              document.getElementById('new_giveaway_givename').value = 0;
+          }
+      });
+
+      // Update giveaway/recevied listing by page load
+      UpdateGiveawayList();
+      UpdateRecievedList();
+      setTimeout(function(){
+        UpdateRecievedList();
+      }, 2500);
+      setTimeout(function(){
+        UpdateGiveawayList();
+      }, 800);
+
+      // Set timer interval for update new giveaway amount
+      setInterval(function(){
+        var isNewGiveawayOpen = document.getElementById('new_giveaway_is_open').value;
+        if (isNewGiveawayOpen=='1') {
+          $("#btn_new_giveaway_update").trigger("click");
+        } else {
+          $("#new_giveaway_img").attr("src", "" );
+          $("#new_giveaway_amount").html('0 BTCz');
+          $("#new_giveaway_uncofirmed").html('0 BTCz');
+        }
+      }, 5000);
+
+      // Interval to verify received
+      setInterval(function(){
+        UpdateRecievedList();
+      }, 120000);
+
+    </script>
+
+
+    <!-- Setting & info save/update -->
+    <script>
+
+      function SaveProfile() {
+
+        $('#profile-form').ajaxForm({
+            url : "dashboard/profile",
+            dataType : 'json',
+            success : function (data) {
+              $("#form-result").html( data );
+              if (data.indexOf("Error")>=0){  $("#form-result").css("background-color","#ff5050");}
+              if (data.indexOf("Error")==-1){  $("#form-result").css("background-color","#33cc33");}
+            }
+        });
+
+        $("#form-result").css("display","block");
+        setTimeout(function(){
+          $("#form-result").css("display","none");
+        }, 3000);
+
+      }
+
+      function SaveSetting() {
+
+        $('#setting-form').ajaxForm({
+            url : "dashboard/setting",
+            dataType : 'json',
+            success : function (data) {
+              $("#form-result").html( data );
+              if (data.indexOf("Error")>=0){  $("#form-result").css("background-color","#ff5050");}
+              if (data.indexOf("Error")==-1){  $("#form-result").css("background-color","#33cc33");}
+            }
+        });
+
+
+        //$("#form-result").html(+$("#setting_sweep").is(':checked'));
+        $("#form-result").css("display","block");
+        setTimeout(function(){
+          $("#form-result").css("display","none");
+        }, 3000);
+
+      }
+
+
+      // Set checkbox value at load
+      if (<%= userSetting[0] %> == 1) {
+        document.getElementById('setting_sweep2').checked = true;
+        document.getElementById('setting_sweep').value = 1;
+      } else {
+        document.getElementById('setting_sweep2').checked = false;
+        document.getElementById('setting_sweep').value = 0;
+      }
+
+      if (<%= userSetting[1] %> == 1) {
+        document.getElementById('setting_mail2').checked = true;
+        document.getElementById('setting_mail').value = 1;
+      } else {
+        document.getElementById('setting_mail2').checked = false;
+        document.getElementById('setting_mail').value = 0;
+      }
+
+
+      // Set Checkbox on change
+      $('#setting_sweep2').change(function() {
+          if($(this).is(":checked")) {
+              document.getElementById('setting_sweep').value = 1;
+          } else {
+              document.getElementById('setting_sweep').value = 0;
+          }
+      });
+      $('#setting_mail2').change(function() {
+          if($(this).is(":checked")) {
+              document.getElementById('setting_mail').value = 1;
+          } else {
+              document.getElementById('setting_mail').value = 0;
+          }
+      });
+
+
+
+    </script>
+
+
+    <script>
+
+      if(<%= open_welcome %> == 1) {
+        setTimeout(function(){
+          $("#myModal_welcome").css('display', 'block');
+        }, 2000);
+      }
+
+      function KillWelcomeInfo() {
+        $.ajax({
+            type: "POST",
+            data: { _id: $("#item_recieved_id").html(), eMail: "<%= userInfo[0] %>" },
+            url : "dashboard/killwelcomeinfo",
+            dataType : 'json',
+            statusCode : {
+               403: function() { // Session expired
+                 document.location.href="/?msg=0";
+               },
+               500: function() { // Internal error
+                 $("#form-result").css("background-color","#ff5050");
+                 $("#form-result").html('The giveaway can not be sweeped.');
+                 $("#form-result").css("display","block");
+                 setTimeout(function(){
+                   $("#form-result").css("display","none");
+                 }, 3000);
+               },
+            },
+            success : function () {}
+        });
+        $("#myModal_welcome").css('display', 'none');
+      }
+
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "_id": "BTCz-Give-Base-Account",
+  "doctype": "account",
+  "timestamp": 1545060725008,
+  "signin_mail": "info@btcz.app",
+  "signin_code": "NA",
+  "signin_date": 1545060725008,
+  "signin_token": "NA",
+  "user_name": "give.btcz.app ADMIN",
+  "user_description": "NA",
+  "user_address": "NA",
+  "auto_sweep": 1,
+  "no_mail": 1
+}

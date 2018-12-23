@@ -1,0 +1,14 @@
+{
+    "_id": "_design\/ip",
+    "comment": "registred account",
+    "views": {
+        "get_ip_by_date": {
+            "map": "function(doc) {\n  if (doc.doctype=='ip') {\n               emit(doc.timestamp, null);\n  }\n}"
+        },
+        "get_ip_by_ip": {
+            "map": "function(doc) {\n  if (doc.doctype=='ip') {\n               emit(doc.ip, null);\n  }\n}"
+        }
+
+    },
+    "language": "javascript"
+}

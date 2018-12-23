@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+
+
+      <title>FAQ | BTCZ Giveaway</title>
+      <meta name="description" content="">
+  		<meta name="Keywords" content="">
+
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+      <link rel="shortcut icon" href="/images/icoBTCZ.png" sizes="32x32" type="image/x-icon">
+      <link rel="apple-touch-icon" type="image/png" href="/images/icoBTCZ.png">
+      <link rel="icon" type="image/png" sizes="144x144" href="/images/icoBTCZ.png">
+
+      <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700,800" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/owl.carousel.css">
+      <link rel="stylesheet" type="text/css" href="css/reset.css">
+      <link rel="stylesheet" type="text/css" href="css/main.css">
+      <link rel="stylesheet" type="text/css" href="css/custom.css">
+
+
+      <script>
+
+          if (!String.prototype.includes) {
+              String.prototype.includes = function(search, start) {
+                  'use strict';
+                  if (typeof start !== 'number') {
+                      start = 0;
+                  }
+
+                  if (start + search.length > this.length) {
+                      return false;
+                  } else {
+                      return this.indexOf(search, start) !== -1;
+                  }
+              };
+          }
+
+      </script>
+
+
+
+
+
+
+  </head>
+
+  <body>
+
+       <div data-template="3" class="f-wrapper ">
+
+           <!-- Top Header of the page  -->
+           <div class="header_topbar">
+               <div class="container">
+                   <div class="row">
+                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                           <div class="ht_left">
+                               <div class="clock">
+                                   <ul>
+                                       <li>UTC</li>
+                                       <li id="hours"></li>
+                                       <li id="point">:</li>
+                                       <li id="min"></li>
+                                       <li id="point-2">:</li>
+                                       <li id="sec"></li>
+                                   </ul>
+                               </div>
+                               <div class="ht_rate">
+
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+
+           <!-- Top of the page -->
+           <div class="f-header btc_header_home" style="min-height:610px;">
+
+               <!-- Menu barre  -->
+               <div class="f-header_bar btc_header_bar_home">
+                   <div class="container">
+                       <div class="row">
+
+                           <div class="f-menu_toggle">
+                             <a href="https://btcz.rocks/" target="_blank"><img class="img-responsive" width="175px" src="images/btcz_logo_txt2.png" alt="" style="float: left;"></a>
+                             <img id="f-menu_toggle" class="fa fa-bars" src="images/dropdown2.png" alt="menu" title="menu" style="float: right;"></img>
+                           </div>
+
+                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-nav_sec">
+                               <div class="f-nav">
+                                 <a class="logo-f-nav" href="https://btcz.rocks/" target="_blank"><img class="img-responsive" width="175px" src="images/btcz_logo_txt2.png" alt="" style="float: left;"></a>
+                                   <nav>
+                                       <ul>
+                                         <li> <a href="/">Home</a>
+                                         </li>
+
+                                         <li class="">
+                                           <a href="/#f-stats">Stats</a>
+                                         </li>
+
+                                         <li  class="f-active">
+                                           <a href="/faq">FAQ</a>
+                                         </li>
+                                         <li class="">
+                                           <a href="/contact">Contact</a>
+                                         </li>
+                                         <%- userBTN %>
+                                         <li class="quote_btn">
+                                           <a target="_blank" href="https://www.mybitcoinzwallet.com/">Get a wallet</a>
+                                         </li>
+                                       </ul>
+                                   </nav>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- Header description -->
+               <div class="f-slider" style="top: 15%;">
+                   <div class="f-slide_text container">
+                       <div class="row">
+                           <div class="col-sm-12 col-md-12">
+                             <h1 style="margin-left: 10px;">FAQ - Frequently Asked Questions</h1>
+
+                             <!-- Qestion list -->
+                             <div class="row faqlist">
+                                 <div class="col-sm-12 col-md-6 col-lg-4">
+                                    <ul>
+                                       <li><a href="#" onClick="
+                                         $('html, body').animate({
+                                           scrollTop: $('#faq1').offset().top
+                                         }, 1000);">What is BitcoinZ (BTCz)?</a></li>
+                                       <li><a href="#" onClick="
+                                         $('html, body').animate({
+                                           scrollTop: $('#faq2').offset().top
+                                         }, 1000);">How can I get BTCz?</a></li>
+                                       <li><a href="#" onClick="
+                                         $('html, body').animate({
+                                           scrollTop: $('#faq3').offset().top
+                                         }, 1000);">What does pay.btcz.app do?</a></li>
+                                       <li><a href="#" onClick="
+                                         $('html, body').animate({
+                                           scrollTop: $('#faq4').offset().top
+                                         }, 1000);">From where comes the exchange rates?</a></li>
+                                       <li><a href="#" onClick="
+                                         $('html, body').animate({
+                                           scrollTop: $('#faq5').offset().top
+                                         }, 1000);">How much does it cost to accept payments with pay.btcz.app?</a></li>
+                                       <li><a href="#" onClick="
+                                         $('html, body').animate({
+                                           scrollTop: $('#faq6').offset().top
+                                         }, 1000);">What is the speed payment method?</a></li>
+                                    </ul>
+                                  </div>
+
+                                  <div class="col-sm-12 col-md-6 col-lg-4">
+                                     <ul>
+                                        <li><a href="#" onClick="
+                                          $('html, body').animate({
+                                            scrollTop: $('#faq7').offset().top
+                                          }, 1000);">Can I use this gateway to accept donations?</a></li>
+                                        <li><a href="#" onClick="
+                                          $('html, body').animate({
+                                            scrollTop: $('#faq8').offset().top
+                                          }, 1000);">When will my order be shipped/delivered?</a></li>
+                                        <li><a href="#" onClick="
+                                          $('html, body').animate({
+                                            scrollTop: $('#faq9').offset().top
+                                          }, 1000);">Do you support alternative payments?</a></li>
+                                        <li><a href="#" onClick="
+                                          $('html, body').animate({
+                                            scrollTop: $('#faq10').offset().top
+                                          }, 1000);">How can I receive a refund?</a></li>
+                                     </ul>
+                                   </div>
+
+                                   <div class="col-sm-12 col-md-6 col-lg-4">
+                                      <ul>
+                                         <li><a href="#" onClick="
+                                           $('html, body').animate({
+                                             scrollTop: $('#faq11').offset().top
+                                           }, 1000);">Are there plugins for eCommerce?</a></li>
+                                         <li><a href="#" onClick="
+                                           $('html, body').animate({
+                                             scrollTop: $('#faq12').offset().top
+                                           }, 1000);">How can I create payment gateways?</a></li>
+                                         <li><a href="#" onClick="
+                                           $('html, body').animate({
+                                             scrollTop: $('#faq13').offset().top
+                                           }, 1000);">Are there any limitations of use?</a></li>
+                                         <li><a href="#" onClick="
+                                           $('html, body').animate({
+                                             scrollTop: $('#faq14').offset().top
+                                           }, 1000);">More questions?</a></li>
+                                      </ul>
+                                    </div>
+
+                              </div>
+
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+           </div>
+
+
+
+           <section id="faq1" class="container f-section f-contact_var" style="padding-top:25px;">
+
+                       <div class="container">
+                           <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>What is BitcoinZ (BTCZ)?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                     <p>BitcoinZ is Bitcoin 2.0 and it's carrying the original vision of fairness and a coin for all.
+                                     Everyone is equal and every coin is made by the community and for the community.
+                                     BitcoinZ fight for freedom. This is a community gift to the world.</p>
+
+                                     <p>BitcoinZ is a bitcoin compatible cryptocurrency based on the zcash core. It utilizes the Equihash
+                                     algorithm with t-addresses and zk-snarks anonymous z-addresses.
+                                     The combination of these technologies enables BitcoinZ to operate as a proven cryptocurrency
+                                     with the ability to offer graphics processor unit (GPU) mining to anyone in the world with
+                                     access to off the shelf graphics cards, also known as commodity hardware. Additionally, it
+                                     enables the portability and compatibility with BitcoinZ and other cryptocurrency blockchains.</p>
+
+                                     <p>Since BitcoinZ has adopted the zcash core, it inherits a ‘halving interval’, adjusted for BitcoinZ’s
+                                     total supply. The halving interval is set for block 840,000 and is estimated to occur in
+                                     approximately 4 years from the Sept 9th, 2017 launch.</p>
+
+                                     <p>BitcoinZ was officially launched by an anonymous developer on September 9 th, 2017 at Block #1
+                                     with BlockHash <a href="https://explorer.btcz.rocks/block/0007844681f84249ad7829f9673ea4b6d26a139c741c5847926aff944337d908" target="_blank">
+                                     0007844681f84249ad7829f9673ea4b6d26a139c741c5847926aff944337d908</a>.
+                                     They deemed BitcoinZ a community gift to the world, emphasizing that it is, and will continue,
+                                     as a community creation.</p>
+
+                                     <p>To enshrine this vision of liberty, fairness, and the fight for freedom, a message was encoded in
+                                     the <a href="https://github.com/btcz/bitcoinz/search?q=Kosciuszko" target="_blank">
+                                     genesis block timestamp</a> of BitcoinZ dedicated to The Purest Son of Liberty -
+                                     <a href="https://en.wikipedia.org/wiki/Tadeusz_Ko%C5%9Bciuszko" target="_blank">
+                                     Thaddeus Kosciuszko</a>, whose 200th death anniversary is October 15th.</p>
+
+                                     <p>More information can be found in the Community Paper (Whitepaper):
+                                     <a href="https://drive.google.com/file/d/19eJ09gwba5Ix9k3Y8Kk7NqdTbnUTFXDj" target="_blank">
+                                       https://drive.google.com/file/d/19eJ09gwba5Ix9k3Y8Kk7NqdTbnUTFXDj</a></p>
+                                  </div>
+
+                           </div>
+                       </div>
+                   </div>
+
+           </section>
+
+           <section id="faq2" class="container f-section f-contact_var" style="padding-top:0px;">
+
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>How can I get BTCz?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                     <p>Before you can accept BitcoinZ, you must have a BTCz address or a BTCz Wallet.
+                                        There are several possibilities described below, for different uses and platform.
+                                        For more information, please visit the official <a href="https://btcz.rocks" target="_blank">BitcoinZ website</a> under wallets section.</p>
+
+                                      <ul>
+                                        <li><a href="https://play.google.com/store/apps/details?id=com.btczcom.btcz" target="_blank">
+                                            Android Wallet</a> : BTCZ Wallet is an Open source wallet for android developped by the BitcoinZ Mobile Development Team.</li>
+                                        <li><a href="https://zeltrez.io/" target="_blank">
+                                            ZelCore Wallet</a> : This Wallet is an multicurency Wallet for iOS and Android device.</li>
+                                        <li><a href="https://www.mybitcoinzwallet.com/" target="_blank">
+                                            Web Wallet</a> : BTCZ Web Wallet is an javascript Open source wallet. Keys are validated on client-side.</li>
+                                        <li><a href="https://github.com/btcz/bitcoinz-wallet/releases" target="_blank">
+                                            Windows Desktop Wallet</a> : This Wallet provides a Graphical User Interface (GUI) for Windows.</li>
+                                        <li><a href="https://github.com/bitcoinz-wallets/bitcoinz-copay-wallet/releases/" target="_blank">
+                                            Copay Wallet</a> : This Wallet has multiplatform releases for Windows, Linux and MacOS.</li>
+                                        <li><a href="https://paper.btcz.rocks/" target="_blank">
+                                            Paper Wallet</a> : JavaScript Client-Side BitcoinZ Paper Wallet Generator using zclassicjs library based on zenaddress.</li>
+                                      </ul>
+
+                                      <p>Now that you owne a BTCz address, you can also receive BitcoinZ ! Remember that you only owne the founds of your address if you owne the private key.
+                                         You are responsible for keeping safe your private keys.</p>
+
+                                      <p>You can sell goods by directly giving your public address to your customer or
+                                         integrate the <a href="https://pay.btcz.app">pay.btcz.app</a> API into your website to automate the sale.
+                                         You can also use the <a href="https://btcz.me" target="_blank">btcz.me</a> interface to facilitate the payment of your customers
+                                         via a QR code if you do not want to automate transactions.</p>
+
+                                      <p>Others way, if you own one or more graphics card (GPU), you can also perform mining of BitcoinZ
+                                         or if you do not want bother with this technique you can simply buy some BTCz on the exchange sites listed
+                                         on the official <a href="https://btcz.rocks" target="_blank">BitcoinZ website</a>.</p>
+
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+
+
+           </section>
+
+           <section id="faq3" class="container f-section f-contact_var" style="padding-top:0px;">
+
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>What does pay.btcz.app do?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                     <p><a href="https://pay.btcz.app">Pay.btcz.app</a> is an BitcoinZ Open-Source payment gateway.</p>
+
+                                     <p>A payment gateway is an ecommerce service that processes payments for online and traditional brick and mortar stores.
+                                        Payment gateways facilitate these transactions by transferring key information between payment portals such as web-enabled mobile
+                                        devices/websites and the front end processor/bank/blockchain.</p>
+
+                                     <p>Linking the flow of goods and money becomes extremely important, because once it's been done,
+                                        companies can to do things like automate payments or confirm transactions.
+                                        In fact, it’s a natural progression for supply chain participants to adopt blockchain payment processors.</p>
+
+                                     <p>Payment gateways fulfill a vital role in the ecommerce transaction process,
+                                        authorizing the payment between merchant and customer. What results is a system that increases efficiency, automation, and liquidity in the supply chain.</p>
+
+                               </div>
+                           </div>
+                       </div>
+                  </div>
+
+           </section>
+
+           <section id="faq4" class="container f-section f-contact_var" style="padding-top:0px;">
+
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>From where comes the exchange rates?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                   <p>The exchange rates comes from the <a href="https://pro.coinmarketcap.com" target="_blank">pro.coinmarketcap.com</a> API.
+                                      We chose the "Hobbyist" plan which allows us to make a change for 10 differents currencies.
+                                      Each currency is refreshed with an interval of <%= RefreshRate %> minutes.</p>
+
+                                      <p>If you are buying and selling, the exchange rate is determined after you have confirmed the
+                                         order and payment is made within the provided time frame.
+                                         If you do not complete your payment within the provided time frame,
+                                         then you will have to repeat the process once again and may be provided with a varied exchange rate.</p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+
+
+           </section>
+
+           <section id="faq5" class="container f-section f-contact_var" style="padding-top:0px;">
+
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>How much does it cost to accept payments with pay.btcz.app?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                     <p>This is a free and open-source service, please support us by donating <a href="https://btcz.me/Marcelus" target="_blank">here</a>.</p>
+                                     <pre style=" padding-left:10px; margin-left:10px; max-width:500px;"><b>[BTCz.app] BTCz</b>: t1VYSo8VtpKMm1SUwp1KJHbqrtfqj7tgpaE</br><b>[Community] BTCz</b>: t1fHHnAXxoPWGY77sG5Zw2sFfGUTpW6BcSZ</pre><br>
+                                     <p style="padding-top:0; margin-top:0;">There is, however, a standard transaction fee that is charged to the buyer (standard network fee)
+                                        and a transaction fee of <%= fee_tx %> BTCz charged to the seller (transfer of the temporary address to the seller's address).</p>
+                                     <p>By using the speed payment method (0 confirmation), a <%= speed_sweep_fee %>% surcharge is charged to the buyer.
+                                        No additional fees are added for a standard payment with <%= confirmation_before_forward %> confirmations.</p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+
+
+           </section>
+
+           <section id="faq6" class="container f-section f-contact_var" style="padding-top:0px;">
+
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>What is the speed payment method?</h2>
+                                   </div>
+
+                                   <div class="f-section_faq">
+                                     <p>This method is an instant checkout method that confirms payment immediately without
+                                        waiting for blockchain confirmations. In general, the payment is confirmed to the seller in 5-8 seconds.</p>
+
+                                     <p>Unlike standard payment, which requires <%= confirmation_before_forward %> confirmations (about 4-6 minutes), the funds are transferred to the seller's address
+                                        immediately after receipt of the transaction ID (TXID) from a temporary address already loaded with confirmed funds.</p>
+
+                                     <p>This method poses no risk to the seller or the buyer. We take all the risks since the funds are advanced from one of our addresses,
+                                        and for this reason we also ask for a <%= speed_sweep_fee %>% surcharge when using the speed payment.
+                                        A maximum amount of <%= SpeedSweepAmount %> BTCz can be used for instant checkout.</p>
+
+                                     <p>The use of the speed payment should only be used when the buyer can not wait, for example when buying from a vending machine.
+                                        In general, for an online purchase on a website, the buyer and the seller can wait for the time required for a standard confirmation so as not to incur additional costs.</p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+
+
+           </section>
+
+           <section id="faq7" class="container f-section f-contact_var" style="padding-top:0px;">
+
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>Can I use this gateway to accept donations?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                     <p>Of course, this gateway can be used for any payment in BTCz whether for goods, services or charity.
+                                        But it will be easier anyway to use the <a href="https://btcz.me" target="_blank">btcz.me</a> interface for charitable donations like for example
+                                        <a href="https://btcz.me/Charity" target="_blank">https://btcz.me/Charity</a> because it is probably more transparent to know the final address in this case.</p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+
+
+           </section>
+
+           <section id="faq8" class="container f-section f-contact_var" style="padding-top:0px;">
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>When will my order be shipped/delivered?</h2>
+                                   </div>
+
+                                   <div class="f-section_faq">
+                                     <p>We have no relationship with the merchants using this gateway.
+                                        We only perform payment verification and no information about your purchases, other than the amount,
+                                        is recorded here. In case of problem of delivery of goods or services, you must therefore directly contact the seller.</p>
+
+                                     <p>In case of payment dispute, you can check your transaction at the following URL:
+                                        https://pay.btcz.app/invoice/ << InvoiceID >> (The invoice ID format is: c5e9631d-b107-4022-8de5-ae9f0efd03af).
+                                        You will find a link that will redirect you to the
+                                        <a href="https://explorer.btcz.rocks/" target="_blank">BTCz block explorer</a> with the BitcoinZ transaction ID.</p>
+                                   </div>
+
+                               </div>
+                           </div>
+                       </div>
+           </section>
+
+           <section id="faq9" class="container f-section f-contact_var" style="padding-top:0px;">
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>Do you support alternative payments?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                     <p>No, only BitcoinZ can be used as a payment method on this gateway.</p>
+                                   </div>
+
+                               </div>
+                           </div>
+                       </div>
+           </section>
+
+           <section id="faq10" class="container f-section f-contact_var" style="padding-top:0px;">
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>How can I receive a refund?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                     <p>A refund of your BTCz is performed automatically if the invoice has not been paid fully once the invoice is expired.
+                                       In this case, the transaction will also not be confirmed.</p>
+
+                                     <p>The over paid amount will be refunded to your address used for payment directly from this payment gateway.
+                                        The merchant receives only the requested amount.</p>
+
+                                     <p>The refund is automatically done about one hour after expiration or success confirmation of the invoice.</p>
+
+                                     <p>We do not refund the paid invoice in case of return of goods or dispute with the seller.
+                                        You will then have to contact the merchant's site directly.</p>
+                                   </div>
+
+
+                               </div>
+                           </div>
+                       </div>
+           </section>
+
+           <section id="faq11" class="container f-section f-contact_var" style="padding-top:0px;">
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>Are there plugins for eCommerce?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                     <p>Yes, we are constantly developing new tools to facilitate the use of the payment through this gateway.
+                                       Visit the <a href="/#plugins">Plugin</a> section to see what is currently available or visit the
+                                       <a href="https://github.com/MarcelusCH/BTCz-Pay/tree/master/plugin" target="_blank">Github</a> repository directly.
+                                       You can also tell us about your needs, and we will try to create a new plugin ASAP.</p>
+                                   </div>
+
+                               </div>
+                           </div>
+                       </div>
+           </section>
+
+           <section id="faq12" class="container f-section f-contact_var" style="padding-top:0px;">
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>How can I create payment gateways?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                     <p>You can create a gateway by directly using the test form on the <a href="/">home page</a> to familiarize yourself with the API.
+                                        You must enter the receipt address, the amount and the conversion currency. This form is not usable on the site of the merchant.</p>
+
+                                     <p>In a sales website, it is necessary to use a <a href="/#plugins">Plugin</a> or to directly integrate the functionality of the API by coding them yourself.
+                                        Please visit the <a href="/started">Getting Started</a> section for more information on how to integrate the API into your online store.</p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+           </section>
+
+           <section id="faq13" class="container f-section f-contact_var" style="padding-top:0px;">
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>Are there any limitations of use?</h2>
+                                   </div>
+                                   <div class="f-section_faq">
+                                     <p>We have implemented two usage limitations to prevent misuse and fraud:</p>
+                                     <ul>
+                                       <li>The first limitation is the amount of active gateways per user that is limited to <%= GatewayLimit %> units.
+                                           The expired and paid gateways are not counted within this limit.
+                                           You can <a href="/contact">contact us</a> and give the IP address of your online store to remove this limitation.</li></br>
+                                       <li>The second limitation is the maximum amount for a speed checkout that is set at <%= SpeedSweepAmount %> BTCz.
+                                           No limitation of amount is fixed for a standard payment.
+                                           Again, you can <a href="/contact">contact us</a> and we will find a solution if you need a higher amount.</li>
+                                     </ul>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+           </section>
+
+           <section id="faq14" class="container f-section f-contact_var" style="padding-top:0px;">
+                 <div class="container">
+                     <div class="clearfix row">
+                               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+                                   <div class="f-section_head">
+                                       <h2>More questions?</h2>
+                                   </div>
+
+                                   <div class="f-section_faq">
+
+                                     <p>For any other related question about this gateway, feel free to contact us via the below community channels.
+                                     You can also contact us directly by using the <a href="/contact">contact form</a>.
+                                     Please visite first the <a href="/started">Getting Started</a> page for any API integration related question.</p>
+
+                                     <center>
+                                         <a class="" href="https://forum.btcz.rocks/t/community-hosted-payment-gateway/842" target="_blank"><img class="" src="images/btcz_forum.png" alt="" style=""></a>
+                                         <a class="" href="https://github.com/MarcelusCH/BTCz-Pay/" target="_blank"><img class="" src="images/github_txt.png" alt="" style=""></a>
+                                         <a class="" href="https://discordapp.com/channels/365065626668105728/507870900339867662" target="_blank"><img class="" src="images/discord_txt.png" alt="" style=""></a>
+                                         <a class="" href="https://bitcointalk.org/index.php?topic=3086664.new;topicseen#new" target="_blank"><img class="" src="images/bitcointalk_txt.png" alt="" style=""></a>
+                                     </center>
+
+
+                                    </div>
+
+                               </div>
+                           </div>
+                       </div>
+           </section>
+
+           <footer>
+               <div class="f-footer_strip">
+                   <div class="container">
+                       <div class="row">
+                           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pull-right f-footer_nav">
+                               <nav>
+                                   <ul>
+                                       <li class="f-active f-has_child"> <a href="/">Home</a></li>
+
+
+                                           <li class="">
+                                             <a href="/faq">FAQ</a>
+                                           </li>
+                                           <li class="">
+                                             <a href="/contact">Contact</a>
+                                          </li>
+                                   </ul>
+                               </nav>
+                           </div>
+                           <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                               <p>Copyright give.btcz.app © 2018. All right reserved</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </footer>
+
+       </div>
+
+       <div class="f-back_to_top" id="f-back_to_top"> <i class="material-icons">arrow_upward</i></div>
+
+       <script type="text/javascript" src="js/jquery.min.js"></script>
+       <script type="text/javascript" src="js/cookie.js"></script>
+       <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+       <script type="text/javascript" src="js/jquery.counter.js"></script>
+       <script type="text/javascript" src="js/custom.js"></script>
+
+   </body>
+
+
+
+</html>
