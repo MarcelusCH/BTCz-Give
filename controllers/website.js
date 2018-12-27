@@ -3,7 +3,7 @@
 * BTCz-Give
 * ==============================================================================
 *
-* Version 0.1.0 (beta)
+* Version 0.1.1 (beta)
 *
 * BitcoinZ giveaway tool
 * https://github.com/MarcelusCH/BTCz-Give
@@ -150,7 +150,7 @@ router.get('/dashboard', function (req, res) {
   (async function () {
 
     // Get user informations
-    let eMail = req.session.email
+    let eMail = req.session.email.toLowerCase()
     let address = req.session.address
     let userName = req.session.username
     let description = req.session.description
@@ -238,7 +238,7 @@ router.post('/dashboard/setting', function (req, res) {
 
 
 
-        let eMail = req.session.email
+        let eMail = req.session.email.toLowerCase()
         let autoSweep = +req.body.setting_sweep
         let noMailing = +req.body.setting_mail
 
@@ -295,7 +295,7 @@ router.post('/dashboard/profile', function (req, res) {
     if (req.session.token) {
       if ((req.session.activity+(30*60*1000))>DateNow) {
 
-        let eMail = req.session.email
+        let eMail = req.session.email.toLowerCase()
         let address = req.body.profile_address
         let userName = req.body.profile_userName
         let userAbout = req.body.profile_message
@@ -363,7 +363,7 @@ router.post('/dashboard/profile', function (req, res) {
 // -----------------------------------------------------------------------------
 router.post('/signin', function (req, res) {
 
-  let eMailBody = req.body.form1_email
+  let eMailBody = req.body.form1_email.toLowerCase()
   let mailTXT = ""
   let mailHTML = ""
   let dateNow = Date.now()
@@ -593,7 +593,7 @@ router.post('/signin', function (req, res) {
 // -----------------------------------------------------------------------------
 router.post('/dashboard', function (req, res) {
 
-  let eMailBody = req.body.form2_mail
+  let eMailBody = req.body.form2_mail.toLowerCase()
   let signinToken = req.body.form2_token
   let signinCode = req.body.form2_code
   let dateNow = Date.now();
@@ -613,7 +613,7 @@ router.post('/dashboard', function (req, res) {
 
       // Check if auth code and token are correct. Check time also.
       account=account.rows[0].doc
-      if (account.signin_code == signinCode && account.signin_token == signinToken && account.signin_mail == eMailBody) {
+      if (account.signin_code == signinCode && account.signin_token == signinToken && account.signin_mail.toLowerCase() == eMailBody) {
 
         // Code expired, redirect to index
         if ((account.signin_date + (30*60*1000)) < dateNow) {
@@ -630,7 +630,7 @@ router.post('/dashboard', function (req, res) {
         }
 
         // Save session and redirect to dashboard
-        req.session.email=account.signin_mail
+        req.session.email=account.signin_mail.toLowerCase()
         req.session.address=account.user_address
         req.session.username=account.user_name
         req.session.description=account.user_description
@@ -661,7 +661,7 @@ router.post('/dashboard', function (req, res) {
 router.post('/dashboard/killwelcomeinfo', function (req, res) {
 
   let dateNow = Date.now();
-  let userEmail = req.body.eMail
+  let userEmail = req.body.eMail.toLowerCase()
   let giveawayID = req.body._id
 
   // Check if logged is session eMail
@@ -742,7 +742,7 @@ router.post('/contact', function (req, res) {
 router.post('/dashboard/newgiveaway', function (req, res) {
 
   let dateNow = Date.now();
-  let userEmail = req.body.new_giveaway_mail
+  let userEmail = req.body.new_giveaway_mail.toLowerCase()
 
   // Check if logged is session eMail
   if (req.session.email!=userEmail) {
@@ -812,7 +812,7 @@ router.post('/dashboard/updatenewgiveaway', function (req, res) {
 
   let dateNow = Date.now();
   let userEmail = req.session.email
-  let giveawayID = req.body.new_giveaway_id_hidden
+  let giveawayID = req.body.new_giveaway_id_hidden.toLowerCase()
 
   // if session expired
   if ((req.session.activity+(30*60*1000))<dateNow) {
@@ -854,7 +854,7 @@ router.post('/dashboard/updatenewgiveaway', function (req, res) {
 router.post('/dashboard/confirmegiveaway', function (req, res) {
 
   let dateNow = Date.now();
-  let senderEmail = req.body.new_giveaway_sender_mail_hidden
+  let senderEmail = req.body.new_giveaway_sender_mail_hidden.toLowerCase()
   let giveawayID = req.body.new_giveaway_id_hidden
   let sendToMail = req.body.new_giveaway_sendto
   let giveMail = req.body.new_giveaway_givemail
@@ -1004,7 +1004,7 @@ router.post('/dashboard/confirmegiveaway', function (req, res) {
 router.post('/dashboard/delgiveaway', function (req, res) {
 
   let dateNow = Date.now();
-  let userEmail = req.session.email
+  let userEmail = req.session.email.toLowerCase()
   let giveawayID = req.body.new_giveaway_id_hidden
 
   // if session expired
@@ -1057,7 +1057,7 @@ router.post('/dashboard/delgiveaway', function (req, res) {
 router.post('/dashboard/updategiveawaylist', function (req, res) {
 
   let dateNow = Date.now();
-  let userEmail = req.session.email
+  let userEmail = req.session.email.toLowerCase()
 
   // if session expired
   if ((req.session.activity+(30*60*1000))<dateNow) {
@@ -1142,7 +1142,7 @@ router.post('/dashboard/updategiveawaylist', function (req, res) {
 router.post('/dashboard/updaterecievedlist', function (req, res) {
 
   let dateNow = Date.now();
-  let userEmail = req.session.email
+  let userEmail = req.session.email.toLowerCase()
 
   // if session expired
   if ((req.session.activity+(30*60*1000))<dateNow) {
@@ -1237,11 +1237,11 @@ router.post('/dashboard/updaterecievedlist', function (req, res) {
 router.post('/dashboard/updategiveawayitem', function (req, res) {
 
   let dateNow = Date.now();
-  let userEmail = req.body.eMail
+  let userEmail = req.body.eMail.toLowerCase()
   let giveawayID = req.body._id
 
   // Check if logged is session eMail
-  if (req.session.email!=userEmail) {
+  if (req.session.email.toLowerCase()!=userEmail) {
     req.session.destroy();
     return res.status(403).send('Session error')
   }
@@ -1338,11 +1338,11 @@ router.post('/dashboard/updategiveawayitem', function (req, res) {
 router.post('/dashboard/sweepgiveaway', function (req, res) {
 
   let dateNow = Date.now();
-  let userEmail = req.body.eMail
+  let userEmail = req.body.eMail.toLowerCase()
   let giveawayID = req.body._id
 
   // Check if logged is session eMail
-  if (req.session.email!=userEmail) {
+  if (req.session.email.toLowerCase()!=userEmail) {
     req.session.destroy();
     return res.status(403).send('Session error')
   }
@@ -1418,11 +1418,11 @@ router.post('/dashboard/sweepgiveaway', function (req, res) {
 router.post('/dashboard/returngiveaway', function (req, res) {
 
   let dateNow = Date.now();
-  let userEmail = req.body.eMail
+  let userEmail = req.body.eMail.toLowerCase()
   let giveawayID = req.body._id
 
   // Check if logged is session eMail
-  if (req.session.email!=userEmail) {
+  if (req.session.email.toLowerCase()!=userEmail) {
     req.session.destroy();
     return res.status(403).send('Session error')
   }
