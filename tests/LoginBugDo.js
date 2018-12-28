@@ -31,7 +31,7 @@ function GetAllAccount() {
 
 function GetAccountByMail(eMail) {
   return rp.get({url: config.couchdb +
-    '/_design/account/_view/get_account_by_mail?key="' + eMail.toLowerCase() + '"' +
+    '/_design/account/_view/get_account_by_mail?key="' + eMail.toLowerCase().trim() + '"' +
     '&inclusive_end=true&limit=10000&reduce=false&include_docs=true',
     json: true})
 }

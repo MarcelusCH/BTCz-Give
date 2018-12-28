@@ -14,14 +14,8 @@ let rp = require('request-promise');
 
 
 
+let eMail ="  buob.MarCel "
 
-let d = new Date();
-d.setDate(d.getDate()+3)
-let day = d.getDate()
-let month = d.getMonth()+1
-let year =d.getFullYear()
-let dateString=year+'-'+month+'-'+day
-
-//let clientIp_t1 = req.headers['x-forwarded-for']
-
-console.log(dateString)
+console.log(eMail)
+console.log(eMail.toLowerCase()+"---")
+console.log(eMail.toLowerCase().trim()+"---")

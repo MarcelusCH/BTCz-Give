@@ -1023,6 +1023,15 @@
         $('#profile-form').ajaxForm({
             url : "dashboard/profile",
             dataType : 'json',
+            statusCode : {
+               403: function() { // Session expired
+                 document.location.href="/?msg=0";
+               },
+               500: function() { // Internal error
+                 $("#form-result").css("background-color","#ff5050");
+                 $("#form-result").html('Unexpected error.');
+               },
+            },
             success : function (data) {
               $("#form-result").html( data );
               if (data.indexOf("Error")>=0){  $("#form-result").css("background-color","#ff5050");}
@@ -1042,13 +1051,21 @@
         $('#setting-form').ajaxForm({
             url : "dashboard/setting",
             dataType : 'json',
+            statusCode : {
+               403: function() { // Session expired
+                 document.location.href="/?msg=0";
+               },
+               500: function() { // Internal error
+                 $("#form-result").css("background-color","#ff5050");
+                 $("#form-result").html('Unexpected error.');
+               },
+            },
             success : function (data) {
               $("#form-result").html( data );
               if (data.indexOf("Error")>=0){  $("#form-result").css("background-color","#ff5050");}
               if (data.indexOf("Error")==-1){  $("#form-result").css("background-color","#33cc33");}
             }
         });
-
 
         //$("#form-result").html(+$("#setting_sweep").is(':checked'));
         $("#form-result").css("display","block");

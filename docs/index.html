@@ -253,16 +253,16 @@
                                    </div>
                                   <ul>
                                      <li>
-                                       <b>Total created gateway: </b><span id="TotGateway"></span>
+                                       <b>Total created giveaway: </b><span id="TotGateway"><%= totGiveaway %></span>
                                      </li>
                                      <li>
-                                       <b>Actual open gateway: </b><span id="ActualGateway"></span>
+                                       <b>Accepted giveaway (3): </b><span id="ActualGateway"><%= acceptedGiveaway %></span>
                                      </li>
                                      <li>
-                                       <b>Paid gateway: </b><span id="PaidGateway"></span>
+                                       <b>Returned giveaway (4): </b><span id="PaidGateway"><%= returnedGiveaway %></span>
                                      </li>
                                      <li>
-                                       <b>Expired gateway: </b><span id="ExpiredGateway"></span>
+                                       <b>Expired giveaway (2): </b><span id="ExpiredGateway"><%= expiredGiveaway %></span>
                                      </li>
                                  </ul>
                                </div>
@@ -314,17 +314,6 @@
        <script type="text/javascript" src="js/jquery.counter.js"></script>
        <script type="text/javascript" src="js/custom.js"></script>
 
-       <script>
-         $('#SpeedSweepLabel').click(function () {
-             if (document.getElementById("SpeedSweep").checked) {
-                 $('input[type=checkbox]').attr('checked', false);
-                 $("#SpeedSweepLabel").html("Speed Pay NOT Active");
-             } else {
-               $('input[type=checkbox]').attr('checked', true);
-               $("#SpeedSweepLabel").html("Speed Pay Active (+<%= speed_sweep_fee %>%)");
-             }
-         });
-       </script>
 
 
    </body>

@@ -3,7 +3,7 @@
     "comment": "registred account",
     "views": {
         "get_account_by_mail": {
-            "map": "function(doc) {\n  if (doc.doctype=='account') {\n               emit(doc.signin_mail.toLowerCase(), null);\n  }\n}"
+            "map": "function(doc) {\n  if (doc.doctype=='account') {\n               emit(doc.signin_mail.toLowerCase().trim(), null);\n  }\n}"
         },
         "get_account_by_id": {
             "map": "function(doc) {\n  if (doc.doctype=='account') {\n               emit(doc._id, null);\n  }\n}"

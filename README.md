@@ -1,4 +1,4 @@
-BTCz-Give (v0.1.1 beta)
+BTCz-Give (v0.1.2 beta)
 ===================
 
 
@@ -73,6 +73,13 @@ TODO
 
 UPDATES
 =======
+
+Version 0.1.2 (beta)
+---
+- Corrected Welcome eMail
+- Corrected Giveaway stats
+- Rewrite some code parts
+
 
 Version 0.1.1 (beta)
 ---

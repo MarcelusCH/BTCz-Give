@@ -3,7 +3,7 @@
 * BTCz-Give
 * ==============================================================================
 *
-* Version 0.1.1 (beta)
+* Version 0.1.2 (beta)
 *
 * BitcoinZ giveaway tool
 * https://github.com/MarcelusCH/BTCz-Give
@@ -36,6 +36,7 @@ let rp = require('request-promise');
 let storage = require('../models/storage')
 let signer = require('../models/signer')
 let blockchain = require('../models/blockchain')
+let sessionlog = require('../models/sessionlog')
 
 // define the login button
 let UserBTNstr ='<li class="quote_btn" >'
@@ -60,13 +61,13 @@ router.get('/generate_qr/:text', function (req, res) {
   })
 })
 
-// Toute for the index main page
+// Route for the index main page
 router.get('/', function (req, res) {
   (async function () {
 
-    // Check if loged, set user btn
+    // Check if logged in, set user btn
     let userBTN =""
-    if (req.session.token) {userBTN=UserBTNstr}
+    if (sessionlog.IsSessionActive(req)) {userBTN=UserBTNstr}
 
     // Get the gift account stats (unspent total amount)
     let unspent = await blockchain.listunspent(config.tmp_address)
@@ -83,19 +84,29 @@ router.get('/', function (req, res) {
     let GiftAvailable = Math.round(TotUnspent/config.gift_value)
     let TotGifts = GiftedGiveawayQty+GiftAvailable
 
+    // Count stats for giveaway total
+    let notTakenGiveaway = await storage.GetGiveawayByState(1)
+    notTakenGiveaway=notTakenGiveaway.rows.length
+    let expiredGiveaway = await storage.GetGiveawayByState(2)
+    expiredGiveaway=expiredGiveaway.rows.length
+    let acceptedGiveaway = await storage.GetGiveawayByState(3)
+    acceptedGiveaway=acceptedGiveaway.rows.length
+    let returnedGiveaway = await storage.GetGiveawayByState(4)
+    returnedGiveaway=returnedGiveaway.rows.length
+
     // Render page
     return res.render(path.join(__dirname + '/../docs/index.html'), {
         GoogleAnalytics: config.GoogleAnalytics,
-        SpeedSweepAmount: config.speedSweep_max,
-        fee_tx: config.fee_tx,
-        speed_sweep_fee: config.speed_sweep_fee,
-        confirmation_before_forward: config.confirmation_before_forward,
         userBTN: userBTN,
         TotGifts: TotGifts,
-        GiftedGiveawayQty:GiftedGiveawayQty,
-        GiftAvailable:GiftAvailable,
+        GiftedGiveawayQty: GiftedGiveawayQty,
+        GiftAvailable: GiftAvailable,
         GiftAddress: config.tmp_address,
-        GiftValue: config.gift_value
+        GiftValue: config.gift_value,
+        totGiveaway: (notTakenGiveaway+expiredGiveaway+acceptedGiveaway+returnedGiveaway),
+        expiredGiveaway: expiredGiveaway,
+        acceptedGiveaway : acceptedGiveaway,
+        returnedGiveaway : returnedGiveaway
     });
 
   })().catch((error) => {
@@ -104,15 +115,16 @@ router.get('/', function (req, res) {
   }) // end async function
 })
 
-// Redirect signin to index (if land here from elsewhere)
+// Redirect signin to index (if land here from elsewhere without post)
 router.get('/signin', function (req, res) {
   return res.redirect('/')
 })
 
+// Route for the FAQ page
 router.get('/faq', function (req, res) {
 
   let userBTN =""
-  if (req.session.token) {userBTN=UserBTNstr}
+  if (sessionlog.IsSessionActive(req)) {userBTN=UserBTNstr}
 
   return res.render(path.join(__dirname + '/../docs/faq.html'),
     { GoogleAnalytics: config.GoogleAnalytics,
@@ -126,10 +138,11 @@ router.get('/faq', function (req, res) {
    });
 })
 
+// Route for the contactpage
 router.get('/contact', function (req, res) {
 
   let userBTN =""
-  if (req.session.token) {userBTN=UserBTNstr}
+  if (sessionlog.IsSessionActive(req)) {userBTN=UserBTNstr}
 
   return res.render(path.join(__dirname + '/../docs/contact.html'),
     { GoogleAnalytics: config.GoogleAnalytics,
@@ -150,7 +163,7 @@ router.get('/dashboard', function (req, res) {
   (async function () {
 
     // Get user informations
-    let eMail = req.session.email.toLowerCase()
+    let eMail = req.session.email
     let address = req.session.address
     let userName = req.session.username
     let description = req.session.description
@@ -159,50 +172,41 @@ router.get('/dashboard', function (req, res) {
     if (description=="NA"){description=""}
     let UserInfo = [eMail, address, userName, description]
 
-    if (req.session.token) {
-      if ((req.session.activity+(30*60*1000))>DateNow) {
+    if (sessionlog.IsSessionActive(req)) {
 
-
-        // Get storage data
-        let account = await storage.GetAccountByMail(eMail)
-        if (account.rows.length==0) {
-          logger.log('/dashboard', [req.id, 'Storage error, user not exist.'])
-          return res.redirect('/?msg=1')
-        }
-
-        // Set user settings
-        account=account.rows[0].doc
-        let autoSweep = account.auto_sweep
-        let noMailing = account.no_mail
-        let UserSetting = [autoSweep, noMailing]
-
-
-
-        // Set date and render dashboard
-        req.session.activity=DateNow
-        return res.render(path.join(__dirname + '/../docs/dashboard.html'),
-              { GoogleAnalytics: config.GoogleAnalytics,
-                userBTN: UserBTNstr,
-                userInfo: UserInfo,
-                userSetting: UserSetting,
-                open_welcome: account.open_welcome,
-                recieved_welcome_gift: account.recieved_welcome_gift,
-                GiftAddress: config.tmp_address,
-              });
-
-      } else { // session expired
-        req.session.destroy();
-        return res.redirect('/?msg=6')
+      // Get storage data for the logged user
+      let account = await storage.GetAccountByMail(eMail)
+      if (account.rows.length!=1) {
+        logger.log('/dashboard', [req.id, 'Storage error : ' + eMail])
+        return res.redirect('/?msg=1')
       }
 
-    } else { // not logged
+      // Set user settings
+      account=account.rows[0].doc
+      let autoSweep = account.auto_sweep
+      let noMailing = account.no_mail
+      let UserSetting = [autoSweep, noMailing]
+
+      // Set date and render dashboard
+      req.session.activity=DateNow
+      return res.render(path.join(__dirname + '/../docs/dashboard.html'), {
+        GoogleAnalytics: config.GoogleAnalytics,
+        userBTN: UserBTNstr,
+        userInfo: UserInfo,
+        userSetting: UserSetting,
+        open_welcome: account.open_welcome,
+        recieved_welcome_gift: account.recieved_welcome_gift,
+        GiftAddress: config.tmp_address,
+      });
+
+    } else { // session expired
       req.session.destroy();
-      return res.redirect('/?msg=5')
+      return res.redirect('/?msg=6')
     }
 
   })().catch((error) => {
     logger.error('/dashboard', [ req.id, error.message, error.stack ])
-    return res.redirect('/?msg=0')
+    res.status(500).send('500')
   }) // end async function
 }); // -------------------------------------------------------------------------
 
@@ -233,52 +237,44 @@ router.post('/dashboard/setting', function (req, res) {
   // Execute...
   (async function () {
 
-    if (req.session.token) {
-      if ((req.session.activity+(30*60*1000))>DateNow) {
+    if (sessionlog.IsSessionActive(req)) {
+
+      let eMail = req.session.email
+      let autoSweep = +req.body.setting_sweep
+      let noMailing = +req.body.setting_mail
 
 
+      // Check user data in storage
+      let account = await storage.GetAccountByMail(eMail)
+      if (account.rows.length==1) {
 
-        let eMail = req.session.email.toLowerCase()
-        let autoSweep = +req.body.setting_sweep
-        let noMailing = +req.body.setting_mail
+        // Save setting
+        account=account.rows[0].doc
+        account.auto_sweep=autoSweep
+        account.no_mail=noMailing
+        let resp = await storage.saveAccount(account)
+        if (resp.error) {
+          logger.error('/dashboard/setting', [req.id, 'Storage fail', resp.error, account])
+          res.status(500).send('Unexpected error')
+        }
 
+        // Return success message
+        req.session.activity=DateNow
+        return res.send(JSON.stringify('The settings have been successfully updated.'))
 
-        // Check user data in storage
-        let account = await storage.GetAccountByMail(eMail)
-        if (account.rows.length==0) {
+      } else {
+        logger.log('/dashboard/setting', [req.id, 'Storage error: ' + eMail])
+        res.status(500).send('Unexpected error')
+      } // end if/else account.rows.length==1
 
-          // User not exist, redirect to index
-          logger.log('/dashboard/setting', [req.id, 'Storage error, user not exist.'])
-          return res.redirect('/?msg=1')
-
-        } else {
-
-          // Save setting
-          account=account.rows[0].doc
-          account.auto_sweep=autoSweep
-          account.no_mail=noMailing
-          let resp = await storage.saveAccount(account)
-          if (resp.error) {
-            logger.error('/dashboard/setting', [req.id, 'Storage fail', resp.error, account])
-            return res.redirect('/?msg=0')
-          }
-
-          // Return success message
-          req.session.activity=DateNow
-          return res.send(JSON.stringify('The settings have been successfully updated.'))
-
-        } // end if/else account.rows.length==0
-      } else { // session expired
-        req.session.destroy();
-        return res.redirect('/?msg=6')
-      }
-    } else { // not logged
+    } else { // session expired
       req.session.destroy();
-      return res.redirect('/?msg=5')
+      res.status(403).send('403')
     }
+
   })().catch((error) => {
-    logger.error('/dashboard/profile', [ req.id, error.message, error.stack ])
-    return res.redirect('/?msg=0')
+    logger.error('/dashboard/setting', [ req.id, error.message, error.stack ])
+    res.status(500).send('Unexpected error')
   }) // end async function
 }); // -------------------------------------------------------------------------
 
@@ -292,62 +288,56 @@ router.post('/dashboard/profile', function (req, res) {
   // Execute...
   (async function () {
 
-    if (req.session.token) {
-      if ((req.session.activity+(30*60*1000))>DateNow) {
+    if (sessionlog.IsSessionActive(req)) {
 
-        let eMail = req.session.email.toLowerCase()
-        let address = req.body.profile_address
-        let userName = req.body.profile_userName
-        let userAbout = req.body.profile_message
+      let eMail = req.session.email
+      let address = req.body.profile_address
+      let userName = req.body.profile_userName
+      let userAbout = req.body.profile_message
 
-        if (userName.replace(/ /g, "")==""){userName="NA"}
-        if (userAbout.replace(/ /g, "")==""){userAbout="NA"}
+      if (userName.replace(/ /g, "")==""){userName="NA"}
+      if (userAbout.replace(/ /g, "")==""){userAbout="NA"}
 
-        // Check if address is valid
-        if (!(signer.isAddressValid(address))){
-          return res.send(JSON.stringify('Error: The BTCz address is not valide.'))
+      // Check if address is valid
+      if (!(signer.isAddressValid(address))){
+        return res.send(JSON.stringify('Error: The BTCz address is not valide.'))
+      }
+
+      // Check user data in storage
+      let account = await storage.GetAccountByMail(eMail)
+      if (account.rows.length==1) {
+
+        // Save account
+        account=account.rows[0].doc
+        account.user_address=address
+        account.user_description=userAbout
+        account.user_name=userName
+        let resp = await storage.saveAccount(account)
+        if (resp.error) {
+          logger.error('/dashboard/profile', [req.id, 'Storage fail', resp.error, account])
+          res.status(500).send('Unexpected error')
         }
 
-        // Check user data in storage
-        let account = await storage.GetAccountByMail(eMail)
-        if (account.rows.length==0) {
+        // Return success message
+        req.session.activity=DateNow
+        req.session.address=address
+        req.session.username=userName
+        req.session.description=userAbout
+        return res.send(JSON.stringify('The profile has been successfully updated.'))
 
-          // User not exist, redirect to index
-          logger.log('/dashboard/profile', [req.id, 'Storage error, user not exist.'])
-          return res.redirect('/?msg=1')
+      } else {
+        logger.log('/dashboard/profile', [req.id, 'Storage error : ' + eMail])
+        res.status(500).send('Unexpected error')
+      } // end if/else account.rows.length==1
 
-        } else {
-
-          // Save account
-          account=account.rows[0].doc
-          account.user_address=address
-          account.user_description=userAbout
-          account.user_name=userName
-          let resp = await storage.saveAccount(account)
-          if (resp.error) {
-            logger.error('/dashboard/profile', [req.id, 'Storage fail', resp.error, account])
-            return res.redirect('/?msg=0')
-          }
-
-          // Return success message
-          req.session.activity=DateNow
-          req.session.address=address
-          req.session.username=userName
-          req.session.description=userAbout
-          return res.send(JSON.stringify('The profile has been successfully updated.'))
-
-        } // end if/else account.rows.length==0
-      } else { // session expired
-        req.session.destroy();
-        return res.redirect('/?msg=6')
-      }
-    } else { // not logged
+    } else { // session expired
       req.session.destroy();
-      return res.redirect('/?msg=5')
+      res.status(403).send('403')
     }
+
   })().catch((error) => {
     logger.error('/dashboard/profile', [ req.id, error.message, error.stack ])
-    return res.redirect('/?msg=0')
+    res.status(500).send('Unexpected error')
   }) // end async function
 }); // -------------------------------------------------------------------------
 
@@ -363,7 +353,7 @@ router.post('/dashboard/profile', function (req, res) {
 // -----------------------------------------------------------------------------
 router.post('/signin', function (req, res) {
 
-  let eMailBody = req.body.form1_email.toLowerCase()
+  let eMailBody = req.body.form1_email.toLowerCase().trim()
   let mailTXT = ""
   let mailHTML = ""
   let dateNow = Date.now()
@@ -436,7 +426,6 @@ router.post('/signin', function (req, res) {
       mailTXT='Welcome, \n\xA0 \n\xA0'+mailTXT
 
     } else { // existing user
-
       account=account.rows[0].doc
 
       // Check if invited by new giveaway creation
@@ -468,9 +457,6 @@ router.post('/signin', function (req, res) {
       mailTXT='Welcome back, \n\xA0 \n\xA0'+mailTXT
 
     }
-
-
-
 
     // Check if IP was used more than n time
     let GiveGift = true
@@ -537,17 +523,9 @@ router.post('/signin', function (req, res) {
       let broadcastResult = await blockchain.broadcastTransaction(tx)
       logger.log('/signin', [req.id, 'Giveaway gift created : '+'gift-'+(req.id).slice(0,30), broadcastResult ])
 
-      // Set eMail text
-      mailHTML='<span>Welcome,</span><br><br>'+mailHTML
-      mailTXT='Welcome, \n\xA0 \n\xA0'+mailTXT
-
     // If to much time used this IP
     } else if (TotUnspent>=(config.gift_value+config.fee_tx) && IpToMuchUsed && accountFirstLogin) {
       logger.log('/signin', [req.id, 'Ip to much used for a gift: '+clientIp , 'new user : '+eMailBody ])
-
-      // Set eMail text
-      mailHTML='<span>Welcome,</span><br><br>'+mailHTML
-      mailTXT='Welcome, \n\xA0 \n\xA0'+mailTXT
     }
 
     // Save user to DB
@@ -574,17 +552,17 @@ router.post('/signin', function (req, res) {
 
         // Redirect to signin code validation page
         logger.log('/signin', [req.id, 'signin code sent' ])
-        return res.render(path.join(__dirname + '/../docs/signin.html'),
-                { GoogleAnalytics: config.GoogleAnalytics,
-                  signin_mail: eMailBody,
-                  signin_token: signinToken
-                });
+        return res.render(path.join(__dirname + '/../docs/signin.html'), {
+          GoogleAnalytics: config.GoogleAnalytics,
+          signin_mail: eMailBody,
+          signin_token: signinToken
+        });
       } // end if/else error sendMail
     });
 
   })().catch((error) => {
     logger.error('/signin', [ req.id, error.message, error.stack ])
-    return res.redirect('/?msg=0')
+    res.status(500).send('500')
   }) // end async function
 }); // -------------------------------------------------------------------------
 
@@ -593,7 +571,7 @@ router.post('/signin', function (req, res) {
 // -----------------------------------------------------------------------------
 router.post('/dashboard', function (req, res) {
 
-  let eMailBody = req.body.form2_mail.toLowerCase()
+  let eMailBody = req.body.form2_mail
   let signinToken = req.body.form2_token
   let signinCode = req.body.form2_code
   let dateNow = Date.now();
@@ -630,7 +608,7 @@ router.post('/dashboard', function (req, res) {
         }
 
         // Save session and redirect to dashboard
-        req.session.email=account.signin_mail.toLowerCase()
+        req.session.email=account.signin_mail.toLowerCase().trim()
         req.session.address=account.user_address
         req.session.username=account.user_name
         req.session.description=account.user_description
@@ -650,7 +628,7 @@ router.post('/dashboard', function (req, res) {
 
   })().catch((error) => {
     logger.error('/signin', [ req.id, error.message, error.stack ])
-    return res.redirect('/?msg=0')
+    res.status(500).send('500')
   }) // end async function
 }); // -------------------------------------------------------------------------
 
@@ -691,14 +669,9 @@ router.post('/dashboard/killwelcomeinfo', function (req, res) {
 
   })().catch((error) => {
     logger.error('/signin', [ req.id, error.message, error.stack ])
-    return res.redirect('/?msg=0')
+    res.status(500).send('500')
   }) // end async function
 }); // -------------------------------------------------------------------------
-
-
-
-
-
 
 
 
@@ -730,8 +703,6 @@ router.post('/contact', function (req, res) {
   });
 
 }); // -------------------------------------------------------------------------
-
-
 
 
 
@@ -854,9 +825,9 @@ router.post('/dashboard/updatenewgiveaway', function (req, res) {
 router.post('/dashboard/confirmegiveaway', function (req, res) {
 
   let dateNow = Date.now();
-  let senderEmail = req.body.new_giveaway_sender_mail_hidden.toLowerCase()
+  let senderEmail = req.body.new_giveaway_sender_mail_hidden.toLowerCase().trim()
   let giveawayID = req.body.new_giveaway_id_hidden
-  let sendToMail = req.body.new_giveaway_sendto
+  let sendToMail = req.body.new_giveaway_sendto.toLowerCase().trim()
   let giveMail = req.body.new_giveaway_givemail
   let giveName = req.body.new_giveaway_givename
   let dateExpire = req.body.new_giveaway_expire
@@ -1049,8 +1020,6 @@ router.post('/dashboard/delgiveaway', function (req, res) {
 
 
 
-
-
 // -----------------------------------------------------------------------------
 // POST route from dashboard update Giveaway list           Update Giveaway list
 // -----------------------------------------------------------------------------
@@ -1229,19 +1198,17 @@ router.post('/dashboard/updaterecievedlist', function (req, res) {
 
 
 
-
-
 // -----------------------------------------------------------------------------
 // POST route from dashboard update Giveaway Item           Update Giveaway item
 // -----------------------------------------------------------------------------
 router.post('/dashboard/updategiveawayitem', function (req, res) {
 
   let dateNow = Date.now();
-  let userEmail = req.body.eMail.toLowerCase()
+  let userEmail = req.body.eMail
   let giveawayID = req.body._id
 
   // Check if logged is session eMail
-  if (req.session.email.toLowerCase()!=userEmail) {
+  if (req.session.email!=userEmail) {
     req.session.destroy();
     return res.status(403).send('Session error')
   }
@@ -1324,8 +1291,6 @@ router.post('/dashboard/updategiveawayitem', function (req, res) {
     return res.status(500).send('Internal error')
   }) // end async function
 }); // -------------------------------------------------------------------------
-
-
 
 
 
@@ -1495,9 +1460,6 @@ router.post('/dashboard/returngiveaway', function (req, res) {
     return res.status(500).send('Internal error')
   }) // end async function
 }); // -------------------------------------------------------------------------
-
-
-
 
 
 
