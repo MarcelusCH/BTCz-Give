@@ -86,7 +86,7 @@
       </div>
 
       <!-- Content of the page  -->
-      <div class="f-header btc_header_home"  style="min-height:810px;">
+      <div class="f-header btc_header_home"  style="min-height:820px;">
 
          <!-- Menu barre  -->
          <div class="f-header_bar btc_header_bar_home">
@@ -131,10 +131,10 @@
          </div>
 
          <!-- Dashboard content -->
-         <div class="f-slider" style="top: 15%;">
-             <div class="f-slide_text container">
+         <div class="f-slider Dashboard">
+             <div class="f-slide_text container ">
                  <div class="row">
-                     <div class="col-sm-12 col-md-12">
+                     <div class="col-sm-12 col-md-12 ">
                        <h1 class="dash_title">My Dashboard</h1>
 
                         <!-- Dashboard content -->
@@ -405,7 +405,7 @@
             <!-- Title -->
             <div class="modal-header">
               <div>New giveaway</div>
-              <p id="new_giveaway_id"></p>
+              <p class="New_QR2" id="new_giveaway_id"></p>
             </div>
 
             <!-- Body -->
@@ -479,9 +479,13 @@
                     <div style="display: table-cell; vertical-align: middle;">
                       <div>
                         <center>
-                          <div style="margin-bottom:5px; font-size:16px; padding-top:5px;"><b>Use this address</br>to charge the gift</b></div>
-                          <img width="300" id="new_giveaway_img"></img>
-                          <div style="margin-bottom:5px;" id="new_giveaway_address"></div>
+                          <div style="margin-bottom:5px; font-size:16px; padding-top:5px;">
+                            <b>Use this address</br>to charge the gift</b>
+                          </br><a onclick="CopyClip()" class="CopyLink">Copy to clipboard</a>
+
+                          </div>
+                          <img class="New_QR" width="300" id="new_giveaway_img"></img>
+                          <div class="New_QR" style="margin-bottom:5px;" id="new_giveaway_address"></div>
                         </center>
                       </div>
                     </div>
@@ -837,7 +841,7 @@
              // Set data
              $("#new_giveaway_id").html(data.giveaway_id);
              $("#new_giveaway_id_hidden").attr("value", data.giveaway_id);
-             $("#new_giveaway_address").html(data.address);
+             $("#new_giveaway_address").html("<a href='bitcoinz:"+data.address+"' id='NewAddressVal'>"+data.address+"</a>");
              $("#new_giveaway_img").attr("src", "generate_qr/bitcoinz%253A" + data.address );
              $("#new_giveaway_is_open").attr("value", "1");
 
@@ -1149,6 +1153,17 @@
 
     </script>
 
+    <script>
+      function CopyClip() {
+        var copyText = $("#NewAddressVal").html();
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val(copyText).select();
+        document.execCommand("copy");
+        $temp.remove();
+        alert("Copied the text: " + copyText);
+      }
+    </script>
 
   </body>
 </html>

@@ -4826,6 +4826,14 @@ ul.f-social a:hover {
 }
 
 
+.Dashboard {
+  top: 130px;
+}
+.dash_accordion {
+  padding-top: 5px;
+}
+
+
 @media screen and (max-width: 1200px)  {
   .mainpage ul {
     font-size: 28px;
@@ -4840,6 +4848,12 @@ ul.f-social a:hover {
   }
   .contact p {
     margin-top:-20px;
+  }
+  .Dashboard {
+    top: 115px;
+  }
+  .dash_accordion {
+    padding-top: 15px;
   }
 }
 
@@ -4860,7 +4874,14 @@ ul.f-social a:hover {
   .contact p {
     margin-top:-10px;
   }
+  .Dashboard {
+    padding-top: 60px;
+  }
+  .dash_accordion {
+    padding-top: 30px;
+  }
 }
+
 @media screen and (max-width: 479px) {
   .faqlist ul, .faqlist  a, .faqlist ol {
     font-size: 16px;
@@ -4872,12 +4893,22 @@ ul.f-social a:hover {
   .contact p , .contact a {
     font-size: 14px;
   }
+  .New_QR {
+    width: 250px;
+    font-size: 12px;
+  }
+  .New_QR2 p {
+    font-size: 8px;
+  }
 }
 
 
 
 
-
+.CopyLink {
+  font-size: 14px;
+  cursor: copy;
+}
 
 
 

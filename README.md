@@ -1,10 +1,10 @@
-BTCz-Give (v0.1.2 beta)
+BTCz-Give (v0.1.3 beta)
 ===================
 
-
 Self-hosted Node.js BitcoinZ Giveaway Tool.
-
 Test phase for the gateway with login.
+
+You can use this tool to send BitcoinZ to your friends using their eMail addresses. The give.btcz.app BTCz Giveaway Tool is an free service that provides you end-to-end-user BTCz payment control. It generates a new address (and QR) for each payment. A expiration date is set in case your freinds do not take the payment, in which case it will be returned to your address. This is an open-sourced solution available as a baseline for further development by anyone.  Intended to push user acceptance, this project can be a great lever for entrepreneurship people to use in their BTCz promotion efforts.  The BTCz Giveaway Tool allows anyone and everyone to promote BTCz in the easiest possible way.
 
 
 Installation
@@ -74,14 +74,22 @@ TODO
 UPDATES
 =======
 
+Version 0.1.3 (beta)
+---
+- Updated Title and About text (Thanks to @SJ Improvement).
+- CSS Style update for mobile devices.
+- Added address copy function and link to open wallet (if configured).
+- Forced email field type in contact form.
+
+
 Version 0.1.2 (beta)
 ---
-- Corrected Welcome eMail
-- Corrected Giveaway stats
-- Rewrite some code parts
+- Corrected Welcome eMail.
+- Corrected Giveaway stats.
+- Rewrite some code parts.
 
 
 Version 0.1.1 (beta)
 ---
-- Updated Login issue (eMail sensitive case)
-- Added Readme in the github
+- Updated Login issue (eMail sensitive case).
+- Added Readme in the github.
