@@ -30,6 +30,7 @@ let fs = require('fs')
 let path = require('path');
 let app = express();
 let config = require('../config');
+let blacklist = require('../mailblacklist');
 let nodemailer = require('nodemailer');
 let logger = require('../utils/logger');
 let rp = require('request-promise');
@@ -358,6 +359,22 @@ router.post('/signin', function (req, res) {
   let mailHTML = ""
   let dateNow = Date.now()
   let clientIp =  (req.headers['x-forwarded-for'] || '' ).replace(' ','').split(',')
+
+
+
+
+
+  // Check if not from an tmp email provider
+  let BlacklistDNS = blacklist.DNS
+  for (var i=0; i < BlacklistDNS.length; i++){
+    if (eMailBody.includes(BlacklistDNS[i])){
+      return res.redirect('/?msg=99')
+    }
+  }
+
+
+
+
 
   // Generate the signin code & token
   let signinToken = crypto.randomBytes(64).toString('hex')

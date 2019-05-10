@@ -201,6 +201,26 @@
                </div>
            </div>
 
+           <section id="FormInfo" class="container f-section f-contact_var" style="padding-top:15px; margin-top:0;padding-bottom:0; margin-bottom:0; display:none;">
+              <div class="container">
+                  <div class="clearfix row">
+                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 f-addr_map">
+
+                       <div class="MsgErr MsgErr99" style="display:none;">
+                         Error: You can not use a tmp eMail provider.
+                       </div>
+                       <div class="MsgErr MsgErr0" style="display:none;">
+                         Error: Unexpected error.
+                       </div>
+                       <div class="MsgErr MsgErr1" style="display:none;">
+                         Error: Login again.
+                       </div>
+
+                     </div>
+                 </div>
+             </div>
+           </section>
+
            <!-- About / Page main description -->
            <section id="f-about" class="container f-section f-contact_var" style="padding-top:25px;">
              <div class="container">
@@ -314,7 +334,20 @@
        <script type="text/javascript" src="js/jquery.counter.js"></script>
        <script type="text/javascript" src="js/custom.js"></script>
 
-
+       <script>
+         var urlParams = new URLSearchParams(window.location.search);
+         var myParam = urlParams.get('msg');
+         if (myParam==='99') {
+           $("#FormInfo").css('display', 'block');
+           $(".MsgErr99").css('display', 'block');
+         } else if (myParam==='0') {
+           $("#FormInfo").css('display', 'block');
+           $(".MsgErr0").css('display', 'block');
+         } else if (myParam==='1') {
+           $("#FormInfo").css('display', 'block');
+           $(".MsgErr1").css('display', 'block');
+         }
+       </script>
 
    </body>
 
